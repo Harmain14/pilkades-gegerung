@@ -68,6 +68,12 @@
                     <p class="text-xs text-blue-100 font-medium">Panitia Pemilihan Kepala Desa Gegerung</p>
                 </div>
             </div>
+            <div class="flex items-center gap-2">
+                <button onclick="openAdminModal()" class="bg-blue-950/70 hover:bg-blue-900 text-white px-3.5 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2 border border-white/20 shadow-sm">
+                    <i class="fa-solid fa-user-shield text-red-400"></i>
+                    <span>Kelola Data (Admin)</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -111,7 +117,10 @@
                             class="w-full pl-12 pr-4 py-3.5 rounded-2xl border-2 border-slate-300 focus:ring-4 focus:ring-blue-100 focus:border-blue-700 text-base sm:text-lg font-mono font-bold tracking-widest text-slate-900 transition">
                     </div>
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 mt-2">
-                        <p class="text-[11px] text-slate-400">Contoh NIK Sample: <span class="font-mono text-slate-600 font-semibold">5201010000000000</span></p>
+                        <p class="text-[11px] text-slate-400">Contoh NIK Sample: <span class="font-mono text-slate-600 font-semibold">5201011508880001</span></p>
+                        <button type="button" onclick="showQuickSampleModal()" class="text-xs text-red-600 hover:text-red-800 font-bold underline flex items-center gap-1">
+                            <i class="fa-solid fa-list-check"></i> Lihat Sample NIK Terdaftar
+                        </button>
                     </div>
                 </div>
 
@@ -437,6 +446,7 @@
                     <i class="fa-solid fa-headset text-red-500"></i> Layanan Pengaduan DPT
                 </h4>
                 <p class="text-slate-300 leading-relaxed">
+                    <b>Narahubung:</b><br>
                     085205133314 (Ketapang), 082341700679 (Jelateng), 087757258881 (Orong)<br>
                     
                 </p>
