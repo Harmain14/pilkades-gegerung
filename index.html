@@ -461,31 +461,42 @@
     </footer>
 
     <script>
-        // Default Sample Voter Dataset
-        const initialVoterData = [
-            { nik: "5201011508880001", nama: "Ahmad Zulkarnaen", dusun: "Gegerung Barat", rtRw: "001/001", noTps: "TPS 01", lokasiTps: "SDN 1 Gegerung, Dusun Gegerung Barat" },
-            { nik: "5201012010920002", nama: "Siti Maryam", dusun: "Gegerung Barat", rtRw: "002/001", noTps: "TPS 01", lokasiTps: "SDN 1 Gegerung, Dusun Gegerung Barat" },
-            { nik: "5201010503750003", nama: "H. Suparman", dusun: "Gegerung Timur", rtRw: "001/002", noTps: "TPS 02", lokasiTps: "Aula PAUD Mawar, Dusun Gegerung Timur" },
-            { nik: "5201011211950004", nama: "Nurul Hidayati", dusun: "Gegerung Timur", rtRw: "002/002", noTps: "TPS 02", lokasiTps: "Aula PAUD Mawar, Dusun Gegerung Timur" },
-            { nik: "5201011807820005", nama: "Lalu Agus Jayadi", dusun: "Kebun Indah", rtRw: "001/003", noTps: "TPS 03", lokasiTps: "Halaman Masjid Al-Abrar, Dusun Kebun Indah" },
-            { nik: "5201012504990006", nama: "Baiq Risna Aulia", dusun: "Kebun Indah", rtRw: "003/003", noTps: "TPS 03", lokasiTps: "Halaman Masjid Al-Abrar, Dusun Kebun Indah" },
-            { nik: "5201010101900007", nama: "Budi Santoso", dusun: "Gegerung Utara", rtRw: "001/004", noTps: "TPS 04", lokasiTps: "Posyandu Mawar 2, Dusun Gegerung Utara" },
-            { nik: "5201011402850008", nama: "Dewi Anggraini", dusun: "Gegerung Utara", rtRw: "002/004", noTps: "TPS 04", lokasiTps: "Posyandu Mawar 2, Dusun Gegerung Utara" },
-            { nik: "5201013009780009", nama: "M. Rizki Ramadhan", dusun: "Gegerung Selatan", rtRw: "001/005", noTps: "TPS 05", lokasiTps: "Lap. Bulutangkis RT 02, Dusun Gegerung Selatan" },
-            { nik: "5201011012010010", nama: "Fitriani", dusun: "Gegerung Selatan", rtRw: "002/005", noTps: "TPS 05", lokasiTps: "Lap. Bulutangkis RT 02, Dusun Gegerung Selatan" }
-        ];
+        // Memory cache untuk data yang dimuat
+        let cachedVoterData = [];
 
-        // Retrieve dataset from localStorage or fallback
-        function getVoterData() {
-            const data = localStorage.getItem('pilkades_gegerung_voters');
-            if (!data) {
-                localStorage.setItem('pilkades_gegerung_voters', JSON.stringify(initialVoterData));
-                return initialVoterData;
+        // Retrieve dataset from localStorage or fetch from local data.json
+        async function loadVoterData() {
+            const localData = localStorage.getItem('pilkades_gegerung_voters');
+            
+            if (localData) {
+                cachedVoterData = JSON.parse(localData);
+                return cachedVoterData;
             }
-            return JSON.parse(data);
+
+            try {
+                // Tarik file data.json dari folder yang sama
+                const response = await fetch('./data.json');
+                if (!response.ok) {
+                    throw new Error('Gagal memuat file data.json');
+                }
+                const data = await response.json();
+                cachedVoterData = data;
+                localStorage.setItem('pilkades_gegerung_voters', JSON.stringify(data));
+                return data;
+            } catch (error) {
+                console.error('Error loading JSON:', error);
+                showToast("Gagal mengambil data dari data.json!", "error");
+                return [];
+            }
+        }
+
+        function getVoterData() {
+            // Mengambil dari memori cache lokal
+            return cachedVoterData;
         }
 
         function saveVoterDataToStorage(data) {
+            cachedVoterData = data;
             localStorage.setItem('pilkades_gegerung_voters', JSON.stringify(data));
         }
 
@@ -770,9 +781,10 @@
             }
         }
 
-        function resetToDefaultData() {
-            if (confirm("Reset ke data sampel awal? Perubahan lokal Anda akan ditimpa.")) {
-                localStorage.setItem('pilkades_gegerung_voters', JSON.stringify(initialVoterData));
+        async function resetToDefaultData() {
+            if (confirm("Reset ke data sampel awal dari data.json? Perubahan lokal Anda akan ditimpa.")) {
+                localStorage.removeItem('pilkades_gegerung_voters');
+                await loadVoterData();
                 renderAdminTable();
                 showToast("Data direset ke default.", "info");
             }
@@ -837,8 +849,9 @@
             }, 3500);
         }
 
-        window.onload = function() {
-            getVoterData();
+        // Muat data JSON saat halaman pertama kali dibuka
+        window.onload = async function() {
+            await loadVoterData();
         };
     </script>
 </body>
