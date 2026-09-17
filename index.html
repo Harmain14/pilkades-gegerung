@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                                <button onclick="openAdminModal()" class="bg-blue-950/70 hover:bg-blue-900 text-white px-3.5 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2 border border-white/20 shadow-sm">
+                <button onclick="openAdminModal()" class="bg-blue-950/70 hover:bg-blue-900 text-white px-3.5 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2 border border-white/20 shadow-sm">
                     <i class="fa-solid fa-user-shield text-red-400"></i>
                     <span>Kelola Data (Admin)</span>
                 </button>
@@ -116,7 +116,10 @@
                             class="w-full pl-12 pr-4 py-3.5 rounded-2xl border-2 border-slate-300 focus:ring-4 focus:ring-blue-100 focus:border-blue-700 text-base sm:text-lg font-mono font-bold tracking-widest text-slate-900 transition">
                     </div>
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 mt-2">
-                        <p class="text-[11px] text-slate-400">Contoh NIK Sample: <span class="font-mono text-slate-600 font-semibold">5201000000000000</span></p>
+                        <p class="text-[11px] text-slate-400">Contoh NIK Sample: <span class="font-mono text-slate-600 font-semibold">5201011508880001</span></p>
+                        <button type="button" onclick="showQuickSampleModal()" class="text-xs text-red-600 hover:text-red-800 font-bold underline flex items-center gap-1">
+                            <i class="fa-solid fa-list-check"></i> Lihat Sample NIK Terdaftar
+                        </button>
                     </div>
                 </div>
 
@@ -461,42 +464,40 @@
     </footer>
 
     <script>
-        // Memory cache untuk data yang dimuat
-        let cachedVoterData = [];
+        // Data sementara untuk fallback jika fetch gagal
+        let currentVoterData = [];
 
-        // Retrieve dataset from localStorage or fetch from local data.json
+        // Fungsi asynchronous untuk membaca data.json
         async function loadVoterData() {
-            const localData = localStorage.getItem('pilkades_gegerung_voters');
-            
-            if (localData) {
-                cachedVoterData = JSON.parse(localData);
-                return cachedVoterData;
-            }
-
             try {
-                // Tarik file data.json dari folder yang sama
-                const response = await fetch('./data.json');
-                if (!response.ok) {
-                    throw new Error('Gagal memuat file data.json');
+                // Cek apakah ada data di localStorage terlebih dahulu (cache admin)
+                const storedData = localStorage.getItem('pilkades_gegerung_voters');
+                if (storedData) {
+                    currentVoterData = JSON.parse(storedData);
+                    return currentVoterData;
                 }
-                const data = await response.json();
-                cachedVoterData = data;
-                localStorage.setItem('pilkades_gegerung_voters', JSON.stringify(data));
-                return data;
+
+                // Ambil data langsung dari file data.json
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error('Gagal mengambil file data.json');
+                
+                currentVoterData = await response.json();
+                
+                // Simpan ke localStorage agar bisa diakses cepat
+                localStorage.setItem('pilkades_gegerung_voters', JSON.stringify(currentVoterData));
+                return currentVoterData;
             } catch (error) {
-                console.error('Error loading JSON:', error);
-                showToast("Gagal mengambil data dari data.json!", "error");
-                return [];
+                console.error("Error loading data:", error);
+                return currentVoterData;
             }
         }
 
         function getVoterData() {
-            // Mengambil dari memori cache lokal
-            return cachedVoterData;
+            return currentVoterData;
         }
 
         function saveVoterDataToStorage(data) {
-            cachedVoterData = data;
+            currentVoterData = data;
             localStorage.setItem('pilkades_gegerung_voters', JSON.stringify(data));
         }
 
@@ -516,7 +517,7 @@
         }
 
         // Handle Form Search Execution
-        function handleSearch(event) {
+        async function handleSearch(event) {
             event.preventDefault();
             const inputNik = document.getElementById('inputNik').value.trim();
             const resultArea = document.getElementById('resultArea');
@@ -526,7 +527,8 @@
                 return;
             }
 
-            const voters = getVoterData();
+            // Memastikan data terbaru sudah dimuat
+            const voters = getVoterData().length > 0 ? getVoterData() : await loadVoterData();
             const voter = voters.find(v => v.nik === inputNik);
 
             resultArea.classList.remove('hidden');
@@ -668,8 +670,8 @@
             document.getElementById('voterFormModal').classList.add('hidden');
         }
 
-        function showQuickSampleModal() {
-            const voters = getVoterData();
+        async function showQuickSampleModal() {
+            const voters = getVoterData().length > 0 ? getVoterData() : await loadVoterData();
             const container = document.getElementById('sampleListContainer');
             container.innerHTML = voters.map(v => `
                 <div onclick="applySample('${v.nik}')" class="p-3 rounded-2xl border border-slate-200 hover:border-red-500 hover:bg-red-50/50 cursor-pointer transition flex justify-between items-center text-xs">
@@ -782,11 +784,11 @@
         }
 
         async function resetToDefaultData() {
-            if (confirm("Reset ke data sampel awal dari data.json? Perubahan lokal Anda akan ditimpa.")) {
+            if (confirm("Reset ke data sampel awal dari data.json?")) {
                 localStorage.removeItem('pilkades_gegerung_voters');
                 await loadVoterData();
                 renderAdminTable();
-                showToast("Data direset ke default.", "info");
+                showToast("Data direset ke data.json.", "info");
             }
         }
 
@@ -849,9 +851,9 @@
             }, 3500);
         }
 
-        // Muat data JSON saat halaman pertama kali dibuka
-        window.onload = async function() {
-            await loadVoterData();
+        // Inisialisasi muat data saat halaman dibuka
+        window.onload = function() {
+            loadVoterData();
         };
     </script>
 </body>
