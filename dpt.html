@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekapitulasi DPT Pilkades Desa Gegerung Tahun 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            500: '#334e68',
+                            800: '#102a43',
+                            900: '#0b1b2b',
+                        },
+                        crimson: {
+                            50: '#fff0f3',
+                            100: '#ffe3e8',
+                            500: '#e63946',
+                            600: '#d90429',
+                            700: '#b7094c',
+                            800: '#800f2f',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 60%, #dc2626 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background-color: white !important;
+            }
+            .print-full-width {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <div>
+        <!-- Top Banner Header -->
+        <header class="gradient-header text-white shadow-xl relative overflow-hidden">
+            <!-- Decorative overlay shapes -->
+            <div class="absolute -right-10 -top-10 w-64 h-64 rounded-full bg-crimson-600 opacity-20 blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-10 -bottom-10 w-64 h-64 rounded-full bg-blue-600 opacity-20 blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 relative z-10">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl">
+                            <img src="LOGO PILKADES DESA GEGERUNG 2026.png">
+                        </div>
+                        <div>
+                            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                                REKAPITULASI DAFTAR PEMILIH TETAP (DPT)
+                            </h1>
+                            <p class="text-blue-100 text-sm sm:text-base mt-1 font-medium">
+                                PILKADES DESA GEGERUNG TAHUN 2026
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Total DPT Badge Card -->
+                    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center text-center shadow-lg min-w-[200px]">
+                        <span class="text-xs uppercase font-bold text-blue-200 tracking-wider">Total DPT Desa</span>
+                        <span class="text-3xl sm:text-4xl font-black text-white mt-1 tracking-tight">3.574</span>
+                        <span class="text-xs text-crimson-200 mt-1 flex items-center gap-1 font-medium">
+                            <i class="fa-solid fa-users"></i> Hak Pilih Terdaftar
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 z-20 relative mb-12">
+            <!-- Quick Stats Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <!-- Stat 1: DPS -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Daftar Pemilih Sementara</span>
+                        <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-slate-800">3.357</span>
+                        <span class="text-xs text-slate-500 font-medium ml-1">pemilih</span>
+                    </div>
+                    <div class="mt-2 text-xs text-slate-500">Data DPS Awal</div>
+                </div>
+
+                <!-- Stat 2: Tambahan -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Pemilih Tambahan</span>
+                        <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-amber-600">+217</span>
+                        <span class="text-xs text-slate-500 font-medium ml-1">pemilih</span>
+                    </div>
+                    <div class="mt-2 text-xs text-slate-500">Penambahan Hasil Perbaikan</div>
+                </div>
+
+                <!-- Stat 3: Total DPT -->
+                <div class="bg-white rounded-2xl p-5 border-2 border-crimson-500/20 shadow-md hover:shadow-lg transition-all duration-200 bg-gradient-to-br from-white to-crimson-50/30">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-crimson-700 uppercase tracking-wider">Total DPT Akhir</span>
+                        <div class="w-9 h-9 rounded-xl bg-crimson-600 text-white flex items-center justify-center font-bold text-sm shadow-md">
+                            <i class="fa-solid fa-check-double"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-crimson-600">3.574</span>
+                        <span class="text-xs text-slate-600 font-medium ml-1">pemilih</span>
+                    </div>
+                    <div class="mt-2 text-xs text-crimson-700 font-medium">DPS + Pemilih Tambahan</div>
+                </div>
+
+                <!-- Stat 4: Laki-laki -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Laki-Laki</span>
+                        <div class="w-9 h-9 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-mars"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-slate-800">1.784</span>
+                        <span class="text-xs text-sky-600 font-bold ml-1">(49,9%)</span>
+                    </div>
+                    <div class="mt-2 w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                        <div class="bg-sky-500 h-1.5 rounded-full" style="width: 49.9%"></div>
+                    </div>
+                </div>
+
+                <!-- Stat 5: Perempuan -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Perempuan</span>
+                        <div class="w-9 h-9 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-venus"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-slate-800">1.790</span>
+                        <span class="text-xs text-pink-600 font-bold ml-1">(50,1%)</span>
+                    </div>
+                    <div class="mt-2 w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                        <div class="bg-pink-500 h-1.5 rounded-full" style="width: 50.1%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+                <!-- Bar Chart: DPT per Dusun -->
+                <div class="lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                                <i class="fa-solid fa-chart-column text-navy-800"></i> Sebaran DPT per Dusun
+                            </h3>
+                            <p class="text-xs text-slate-500">Perbandingan total DPS, Tambahan, dan DPT Akhir</p>
+                        </div>
+                    </div>
+                    <div class="h-72 w-full">
+                        <canvas id="barChartDusun"></canvas>
+                    </div>
+                </div>
+
+                <!-- Pie Chart: Demografi Gender -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2 mb-1">
+                            <i class="fa-solid fa-pie-chart text-crimson-600"></i> Proporsi Gender
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-4">Perbandingan Laki-Laki vs Perempuan</p>
+                        <div class="h-56 w-full flex items-center justify-center relative">
+                            <canvas id="genderPieChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-center pt-4 border-t border-slate-100 mt-2">
+                        <div class="p-2 bg-sky-50 rounded-xl border border-sky-100">
+                            <span class="block text-xs font-semibold text-sky-700"><i class="fa-solid fa-mars"></i> Laki-Laki</span>
+                            <span class="font-black text-sky-900 text-lg">1.784</span>
+                        </div>
+                        <div class="p-2 bg-pink-50 rounded-xl border border-pink-100">
+                            <span class="block text-xs font-semibold text-pink-700"><i class="fa-solid fa-venus"></i> Perempuan</span>
+                            <span class="font-black text-pink-900 text-lg">1.790</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 no-print">
+                <!-- Search Box -->
+                <div class="relative flex-1 max-w-md">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="searchInput" oninput="filterData()" placeholder="Cari nama dusun..." 
+                           class="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-navy-800/20 focus:border-navy-800 transition-all">
+                </div>
+
+                <!-- View Switcher & Actions -->
+                <div class="flex items-center gap-3">
+                    <div class="bg-slate-100 p-1 rounded-xl flex items-center gap-1 border border-slate-200">
+                        <button id="btnGridView" onclick="switchView('grid')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-2 bg-white text-navy-900 shadow-sm">
+                            <i class="fa-solid fa-grid-2"></i> Kartu (Grid)
+                        </button>
+                        <button id="btnTableView" onclick="switchView('table')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-2 text-slate-600 hover:text-navy-900">
+                            <i class="fa-solid fa-list"></i> Tabel Data
+                        </button>
+                    </div>
+
+                    <button onclick="window.print()" class="px-4 py-2 bg-navy-800 text-white rounded-xl text-xs font-bold hover:bg-navy-900 transition-all shadow-md flex items-center gap-2">
+                        <i class="fa-solid fa-print"></i> Cetak Rekap
+                    </button>
+                </div>
+            </div>
+
+            <div id="gridContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                <!-- Dynamic cards populated via JavaScript -->
+            </div>
+
+            <div id="tableContainer" class="hidden mt-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-600">
+                        <thead class="bg-slate-800 text-white text-xs uppercase font-semibold">
+                            <tr>
+                                <th class="px-6 py-4">Nama Dusun</th>
+                                <th class="px-6 py-4 text-center">DPS Awal</th>
+                                <th class="px-6 py-4 text-center">Pemilih Tambahan</th>
+                                <th class="px-6 py-4 text-center">DPT Akhir</th>
+                                <th class="px-6 py-4 text-center">Laki-Laki (L)</th>
+                                <th class="px-6 py-4 text-center">Perempuan (P)</th>
+                                <th class="px-6 py-4 text-center">Rasio Gender</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="divide-y divide-slate-100 font-medium">
+                            <!-- Dynamic table rows -->
+                        </tbody>
+                        <tfoot class="bg-crimson-50 text-slate-900 font-bold border-t-2 border-crimson-200">
+                            <tr>
+                                <td class="px-6 py-4 text-crimson-700">TOTAL DESA GEGERUNG</td>
+                                <td class="px-6 py-4 text-center">3.357</td>
+                                <td class="px-6 py-4 text-center text-amber-600">+217</td>
+                                <td class="px-6 py-4 text-center text-crimson-600 font-black text-base">3.574</td>
+                                <td class="px-6 py-4 text-center text-sky-700">1.784</td>
+                                <td class="px-6 py-4 text-center text-pink-700">1.790</td>
+                                <td class="px-6 py-4 text-center text-xs text-slate-500">49.9% L / 50.1% P</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer class="bg-blue-950 text-slate-300 border-t-4 border-red-600 text-xs mt-12">
+        <div class="max-w-6xl mx-auto px-4 py-8 sm:px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+                <h4 class="text-white font-extrabold text-sm mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-landmark text-red-500"></i> Sekretariat Panitia PILKADES
+                </h4>
+                <p class="text-slate-300 leading-relaxed">
+                    Jl. Gaharu No. 1 Desa Gegerung, Kec. Lingsar, Kabupaten Lombok Barat, Nusa Tenggara Barat.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white font-extrabold text-sm mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-headset text-red-500"></i> Layanan Pengaduan DPT
+                </h4>
+                <p class="text-slate-300 leading-relaxed">
+                    085205133314 (Ketapang), 082341700679 (Jelateng), 087757258881 (Orong)<br>
+                    
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white font-extrabold text-sm mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-red-500"></i> Transparansi Pemilu
+                </h4>
+                <p class="text-slate-300 leading-relaxed">
+                    Portal publik pencarian Daftar Pemilih Tetap (DPT) Pemilihan Kepala Desa Gegerung secara mandiri.
+                </p>
+            </div>
+        </div>
+        <div class="bg-slate-950 py-4 text-center text-slate-400 border-t border-slate-800/80">
+            &copy; 2026 Panitia Pemilihan Kepala Desa (PILKADES) Desa Gegerung. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Data DPT Per Dusun
+        const dptData = [
+            { id: 1, name: "Dusun Ketapang", dps: 929, tambahan: 48, dpt: 977, l: 492, p: 485 },
+            { id: 2, name: "Jelateng Barat", dps: 333, tambahan: 13, dpt: 346, l: 174, p: 172 },
+            { id: 3, name: "Jelateng Tengah", dps: 397, tambahan: 21, dpt: 418, l: 204, p: 214 },
+            { id: 4, name: "Jelateng Timur", dps: 375, tambahan: 21, dpt: 396, l: 192, p: 214 },
+            { id: 5, name: "Orong Selatan", dps: 589, tambahan: 46, dpt: 635, l: 319, p: 316 },
+            { id: 6, name: "Orong Utara", dps: 363, tambahan: 25, dpt: 388, l: 203, p: 185 },
+            { id: 7, name: "Orong Puncak", dps: 371, tambahan: 43, dpt: 414, l: 200, p: 214 }
+        ];
+
+        let barChartInstance = null;
+        let pieChartInstance = null;
+
+        // Render Grid View
+        function renderCards(data) {
+            const container = document.getElementById("gridContainer");
+            container.innerHTML = "";
+
+            if(data.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-400">
+                        <i class="fa-solid fa-folder-open text-4xl mb-2"></i>
+                        <p class="text-sm font-medium">Tidak ada dusun yang sesuai dengan pencarian.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            data.forEach(item => {
+                const lPercent = ((item.l / item.dpt) * 100).toFixed(1);
+                const pPercent = ((item.p / item.dpt) * 100).toFixed(1);
+
+                const cardHtml = `
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-navy-800 group-hover:bg-crimson-600 transition-colors"></div>
+                        
+                        <div>
+                            <!-- Card Header -->
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <span class="text-[10px] uppercase tracking-wider font-bold text-slate-400">Dusun</span>
+                                    <h4 class="text-lg font-bold text-slate-800 leading-tight">${item.name}</h4>
+                                </div>
+                                <span class="bg-navy-50 text-navy-800 font-extrabold px-3 py-1 rounded-xl text-xs border border-navy-100">
+                                    DPT: ${item.dpt}
+                                </span>
+                            </div>
+
+                            <!-- DPS & Tambahan Info -->
+                            <div class="grid grid-cols-2 gap-2 mb-4 bg-slate-50 p-3 rounded-xl text-xs">
+                                <div>
+                                    <span class="text-slate-400 block font-medium">DPS Awal</span>
+                                    <span class="font-bold text-slate-700">${item.dps}</span>
+                                </div>
+                                <div>
+                                    <span class="text-slate-400 block font-medium">Tambahan</span>
+                                    <span class="font-bold text-amber-600">+${item.tambahan}</span>
+                                </div>
+                            </div>
+
+                            <!-- Gender Breakdown -->
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1">
+                                        <span class="text-sky-700 flex items-center gap-1"><i class="fa-solid fa-mars text-sky-500"></i> Laki-Laki</span>
+                                        <span class="text-slate-700">${item.l} <span class="text-slate-400 font-normal">(${lPercent}%)</span></span>
+                                    </div>
+                                    <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+                                        <div class="bg-sky-500 h-2 rounded-full" style="width: ${lPercent}%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1">
+                                        <span class="text-pink-700 flex items-center gap-1"><i class="fa-solid fa-venus text-pink-500"></i> Perempuan</span>
+                                        <span class="text-slate-700">${item.p} <span class="text-slate-400 font-normal">(${pPercent}%)</span></span>
+                                    </div>
+                                    <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+                                        <div class="bg-pink-500 h-2 rounded-full" style="width: ${pPercent}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML("beforeend", cardHtml);
+            });
+        }
+
+        // Render Table View
+        function renderTable(data) {
+            const tbody = document.getElementById("tableBody");
+            tbody.innerHTML = "";
+
+            if(data.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="py-8 text-center text-slate-400 text-xs">
+                            Tidak ada data dusun ditemukan.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            data.forEach(item => {
+                const lPercent = ((item.l / item.dpt) * 100).toFixed(1);
+                const pPercent = ((item.p / item.dpt) * 100).toFixed(1);
+
+                const rowHtml = `
+                    <tr class="hover:bg-slate-50/80 transition-colors">
+                        <td class="px-6 py-4 font-bold text-slate-800">${item.name}</td>
+                        <td class="px-6 py-4 text-center text-slate-600">${item.dps}</td>
+                        <td class="px-6 py-4 text-center text-amber-600 font-bold">+${item.tambahan}</td>
+                        <td class="px-6 py-4 text-center font-extrabold text-navy-900 bg-slate-50/50">${item.dpt}</td>
+                        <td class="px-6 py-4 text-center text-sky-700 font-semibold">${item.l}</td>
+                        <td class="px-6 py-4 text-center text-pink-700 font-semibold">${item.p}</td>
+                        <td class="px-6 py-4 text-center text-xs">
+                            <span class="inline-block px-2 py-0.5 rounded bg-sky-50 text-sky-700 border border-sky-100">${lPercent}% L</span>
+                            <span class="inline-block px-2 py-0.5 rounded bg-pink-50 text-pink-700 border border-pink-100 ml-1">${pPercent}% P</span>
+                        </td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML("beforeend", rowHtml);
+            });
+        }
+
+        // Filter Data by Search Term
+        function filterData() {
+            const query = document.getElementById("searchInput").value.toLowerCase();
+            const filtered = dptData.filter(d => d.name.toLowerCase().includes(query));
+            renderCards(filtered);
+            renderTable(filtered);
+        }
+
+        // Switch View Mode (Grid vs Table)
+        function switchView(mode) {
+            const grid = document.getElementById("gridContainer");
+            const table = document.getElementById("tableContainer");
+            const btnGrid = document.getElementById("btnGridView");
+            const btnTable = document.getElementById("btnTableView");
+
+            if (mode === 'grid') {
+                grid.classList.remove("hidden");
+                table.classList.add("hidden");
+                
+                btnGrid.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-2 bg-white text-navy-900 shadow-sm";
+                btnTable.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-2 text-slate-600 hover:text-navy-900";
+            } else {
+                grid.classList.add("hidden");
+                table.classList.remove("hidden");
+
+                btnTable.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-2 bg-white text-navy-900 shadow-sm";
+                btnGrid.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-2 text-slate-600 hover:text-navy-900";
+            }
+        }
+
+        // Initialize Charts
+        function initCharts() {
+            // Bar Chart
+            const ctxBar = document.getElementById('barChartDusun').getContext('2d');
+            barChartInstance = new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: dptData.map(d => d.name),
+                    datasets: [
+                        {
+                            label: 'DPS Awal',
+                            data: dptData.map(d => d.dps),
+                            backgroundColor: '#334e68',
+                            borderRadius: 6,
+                        },
+                        {
+                            label: 'Pemilih Tambahan',
+                            data: dptData.map(d => d.tambahan),
+                            backgroundColor: '#d90429',
+                            borderRadius: 6,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { family: 'Inter', size: 12, weight: '500' },
+                                usePointStyle: true,
+                                boxWidth: 8
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#0b1b2b',
+                            padding: 12,
+                            titleFont: { family: 'Inter', size: 13, weight: '700' },
+                            bodyFont: { family: 'Inter', size: 12 }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: 'Inter', size: 11 } }
+                        },
+                        y: {
+                            grid: { color: '#f1f5f9' },
+                            ticks: { font: { family: 'Inter', size: 11 } }
+                        }
+                    }
+                }
+            });
+
+            // Pie Chart Gender
+            const ctxPie = document.getElementById('genderPieChart').getContext('2d');
+            pieChartInstance = new Chart(ctxPie, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Laki-Laki', 'Perempuan'],
+                    datasets: [{
+                        data: [1784, 1790],
+                        backgroundColor: ['#0284c7', '#ec4899'],
+                        borderWidth: 4,
+                        borderColor: '#ffffff',
+                        hoverOffset: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#0b1b2b',
+                            padding: 12,
+                            callbacks: {
+                                label: function(context) {
+                                    const total = 3574;
+                                    const val = context.raw;
+                                    const pct = ((val / total) * 100).toFixed(1);
+                                    return ` ${context.label}: ${val} (${pct}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize App on DOM Loaded
+        document.addEventListener("DOMContentLoaded", () => {
+            renderCards(dptData);
+            renderTable(dptData);
+            initCharts();
+        });
+    </script>
+</body>
+</html>
