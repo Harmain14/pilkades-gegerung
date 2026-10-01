@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PILKADES DESA GEGERUNG TAHUN 2026 - Portal Resmi Panitia</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',  
+                            100: '#dbeafe', 
+                            500: '#3b82f6', 
+                            600: '#2563eb', 
+                            700: '#1d4ed8', 
+                            800: '#1e40af', 
+                            900: '#1e3a8a', 
+                        },
+                        accent: {
+                            amber: '#f59e0b',
+                            gold: '#d97706',
+                            blue: '#2563eb'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Poppins', sans-serif; }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        .dark .glass-nav {
+            background: rgba(15, 23, 42, 0.9);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 glass-nav border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo & Brand -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="w-12 h-12 flex items-center justify-center text-white font-bold text-xl">
+                        <img src="logo.png" alt="Logo Desa" onerror="this.src='https://via.placeholder.com/48?text=Desa'">
+                    </div>
+                    <div>
+                        <div class="font-bold text-lg leading-tight text-primary-900 dark:text-primary-100 font-heading tracking-wide">
+                            PILKADES GEGERUNG 2026
+                        </div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                            Kab. Lombok Barat | Transparan & Demokratis
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-6 font-medium text-sm">
+                    <button onclick="navigateTo('home')" class="hover:text-primary-600 dark:hover:text-primary-400 transition">Beranda</button>
+                    <button onclick="navigateTo('dpt')" class="hover:text-primary-600 dark:hover:text-primary-400 transition">DPT</button>
+                    <button onclick="navigateTo('calon')" class="hover:text-primary-600 dark:hover:text-primary-400 transition">Calon</button>
+                    <button onclick="navigateTo('panitia')" class="hover:text-primary-600 dark:hover:text-primary-400 transition">Panitia</button>
+                    <button onclick="navigateTo('berita')" class="hover:text-primary-600 dark:hover:text-primary-400 transition">Berita</button>
+                    <button onclick="navigateTo('jadwal')" class="hover:text-primary-600 dark:hover:text-primary-400 transition">Jadwal</button>
+                    <button onclick="navigateTo('informasi')" class="hover:text-primary-600 dark:hover:text-primary-400 transition">Informasi</button>
+                    <button onclick="navigateTo('kontak')" class="hover:text-primary-600 dark:hover:text-primary-400 transition">Kontak</button>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <button onclick="toggleDarkMode()" class="p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                        <i data-lucide="moon" id="dark-icon" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="navigateTo('cek-dpt')" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-lg shadow-sm transition flex items-center gap-2">
+                        <i data-lucide="search" class="w-4 h-4"></i> Cek DPT
+                    </button>
+                    <button id="admin-nav-btn" onclick="DB.currentUser ? navigateTo('admin-dashboard') : navigateTo('admin-login')" class="px-4 py-2 bg-primary-700 hover:bg-primary-800 text-white text-sm font-semibold rounded-lg shadow-sm transition flex items-center gap-2">
+                        <i data-lucide="lock" class="w-4 h-4"></i> Admin Login
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex md:hidden items-center gap-2">
+                    <button onclick="toggleDarkMode()" class="p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white">
+                        <i data-lucide="moon" class="w-5 h-5"></i>
+                    </button>
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 text-slate-600 dark:text-slate-300">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-2 pb-6 space-y-3">
+            <button onclick="navigateTo('home'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium">Beranda</button>
+            <button onclick="navigateTo('dpt'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium">DPT</button>
+            <button onclick="navigateTo('cek-dpt'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-amber-600 font-semibold">Cek Status DPT</button>
+            <button onclick="navigateTo('calon'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium">Calon Kepala Desa</button>
+            <button onclick="navigateTo('panitia'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium">Struktur Panitia</button>
+            <button onclick="navigateTo('berita'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium">Berita & Kegiatan</button>
+            <button onclick="navigateTo('jadwal'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium">Jadwal Pilkades</button>
+            <button onclick="navigateTo('informasi'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium">Informasi & Regulasi</button>
+            <button onclick="navigateTo('kontak'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium">Kontak Panitia</button>
+            <div class="pt-2 border-t border-slate-200 dark:border-slate-800">
+                <button onclick="DB.currentUser ? navigateTo('admin-dashboard') : navigateTo('admin-login'); toggleMobileMenu()" class="w-full py-2 bg-primary-700 text-white rounded-lg font-semibold text-center">Login Portal Admin</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main id="main-content" class="flex-grow">
+        <!-- Dynamic content will render here -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-primary-900 text-white border-t border-primary-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Info Desa -->
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center font-bold">
+                            <i data-lucide="vote" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <h3 class="font-bold text-lg font-heading">PILKADES DESA GEGERUNG TAHUN 2026</h3>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed max-w-md">
+                        Portal Informasi Resmi Panitia Pemilihan Kepala Desa Gegerung Tahun 2026. Mendorong Pemilihan yang Transparan, Demokratis, Jujur, Adil, dan Partisipatif.
+                    </p>
+                    <div class="text-xs text-slate-400">
+                        Sekretariat: Kantor Desa Gegerung, Kec. Lingsar, Kab. Lombok Barat
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold text-amber-400 mb-4 font-heading">Navigasi Utama</h4>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li><a href="#" onclick="navigateTo('home'); return false;" class="hover:text-white transition">Beranda</a></li>
+                        <li><a href="#" onclick="navigateTo('dpt'); return false;" class="hover:text-white transition">Daftar Pemilih Tetap (DPT)</a></li>
+                        <li><a href="#" onclick="navigateTo('calon'); return false;" class="hover:text-white transition">Kandidat Calon Kades</a></li>
+                        <li><a href="#" onclick="navigateTo('jadwal'); return false;" class="hover:text-white transition">Jadwal Tahapan</a></li>
+                        <li><a href="#" onclick="navigateTo('informasi'); return false;" class="hover:text-white transition">Regulasi & Dokumentasi</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Short -->
+                <div>
+                    <h4 class="font-semibold text-amber-400 mb-4 font-heading">Layanan Publik</h4>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li><a href="#" onclick="navigateTo('cek-dpt'); return false;" class="hover:text-white transition">Pengecekan DPT Mandiri</a></li>
+                        <li><a href="#" onclick="navigateTo('kontak'); return false;" class="hover:text-white transition">Layanan Pengaduan</a></li>
+                        <li><a href="#" onclick="navigateTo('panitia'); return false;" class="hover:text-white transition">Profil Panitia</a></li>
+                        <li><a href="#" onclick="navigateTo('admin-login'); return false;" class="hover:text-white transition">Akses Administrator</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-12 pt-6 border-t border-primary-800/80 text-center text-xs text-slate-400 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    &copy; 2026 Panitia Pemilihan Kepala Desa Gegerung. All rights reserved.
+                </div>
+                <div class="flex gap-4">
+                    <span>Versi Portal: 2.0-PROD</span>
+                    <span>|</span>
+                    <span>Kabupaten Lombok Barat</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL CONTAINERS FOR ADMIN ACTIONS -->
+    <div id="admin-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-xl w-full border border-slate-200 dark:border-slate-700 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
+            <div class="p-6 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50">
+                <h3 id="modal-title" class="font-bold text-lg font-heading text-slate-900 dark:text-white">Modal Form</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+            <div id="modal-body" class="p-6 overflow-y-auto flex-grow space-y-4">
+                <!-- Form Inputs inserted dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT APPLICATION LOGIC -->
+    <script>
+        // GLOBAL APP STATE & MOCK DATABASE
+        // GLOBAL APP STATE & DATABASE (Dimuat secara dinamis dari file JSON)
+        const DB = {
+            dusuns: [],
+            totalDpt: { dps: 0, tambahan: 0, total: 0, l: 0, p: 0 },
+            voters: [],
+            candidates: [],
+            invalidVotes: 45,
+            committee: [
+                { id: 1, nama: "ABDULLAH HARMAIN, S.Kom", jabatan: "Ketua Panitia Pilkades", photo: "panitia/harmain.png", urutan: 1 },
+                { id: 2, nama: "RUSDI, S.I.Kom", jabatan: "Sekretaris", photo: "panitia/rusdi.png", urutan: 2 },
+                { id: 3, nama: "KAROMATUL ULYA, SE.,ME.", jabatan: "Bendahara", photo: "panitia/ulya.png", urutan: 3 },
+                { id: 4, nama: "EDY MAZHAR", jabatan: "Seksi Pendaftaran Calon dan Pemilih", photo: "panitia/mazhar.png", urutan: 4 },
+                { id: 5, nama: "SISWANDI", jabatan: "Seksi Keamanan", photo: "panitia/siswandi.png", urutan: 5 },
+                { id: 6, nama: "RIRI HALVI, S.Pd", jabatan: "Seksi Logistik", photo: "panitia/riri.png", urutan: 6 },
+                { id: 7, nama: "AHMAD JUSAINI", jabatan: "Seksi Pemungutan dan Penghitungan Suara", photo: "panitia/jus.png", urutan: 7 }
+            ],
+            news: [],
+            schedules: [],
+            announcements: [
+                { id: 1, title: "Surat Keputusan Panitia tentang Penetapan DPT", date: "2026-10-16", file: "SK-DPT-GEGERUNG-2026.pdf" },
+                { id: 2, title: "Tata Tertib Pelaksanaan Kampanye Pilkades 2026", date: "2026-10-28", file: "TATIB-KAMPANYE-2026.pdf" }
+            ],
+            auditLogs: [
+                { id: 1, time: "2026-09-30 14:20:10", user: "SuperAdmin", action: "Login System", details: "Admin login successfully" }
+            ],
+            currentUser: null,
+            activeAdminTab: 'overview'
+        };
+
+        // Fungsi untuk memuat semua data JSON secara异步 (Asynchronous)
+        async function loadDatabase() {
+            try {
+                const [resDusun, resVoters, resCandidates, resNews, resSchedules] = await Promise.all([
+                    fetch('data/dusun.json'),
+                    fetch('data/voters.json'),
+                    fetch('data/candidates.json'),
+                    fetch('data/news.json'),
+                    fetch('data/schedules.json')
+                ]);
+
+                DB.dusuns = await resDusun.json();
+                DB.voters = await resVoters.json();
+                DB.candidates = await resCandidates.json();
+                DB.news = await resNews.json();
+                DB.schedules = await resSchedules.json();
+
+                // Hitung otomatis total DPT berdasarkan data dusun.json
+                let totalDps = 0, totalTambahan = 0, totalL = 0, totalP = 0, grandTotal = 0;
+                DB.dusuns.forEach(d => {
+                    totalDps += d.dps || 0;
+                    totalTambahan += d.tambahan || 0;
+                    totalL += d.l || 0;
+                    totalP += d.p || 0;
+                    grandTotal += d.dpt || (d.dps + d.tambahan);
+                });
+
+                DB.totalDpt = {
+                    dps: totalDps,
+                    tambahan: totalTambahan,
+                    total: grandTotal,
+                    l: totalL,
+                    p: totalP
+                };
+
+                console.log("Database JSON berhasil dimuat!", DB);
+                
+                // Render halaman utama setelah data siap
+                navigateTo('home');
+            } catch (error) {
+                console.error("Gagal memuat data JSON:", error);
+                alert("Terjadi kesalahan saat memuat data dari server/lokal. Pastikan file JSON tersedia di folder 'data/'.");
+            }
+        }
+
+// Jalankan pemuatan data saat halaman selesai dimuat
+window.addEventListener('DOMContentLoaded', () => {
+    loadDatabase();
+});
+        // NAVIGATION LOGIC
+        function navigateTo(page, param = null) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const main = document.getElementById('main-content');
+            
+            // Update admin login button in header
+            const adminNavBtn = document.getElementById('admin-nav-btn');
+            if (adminNavBtn) {
+                adminNavBtn.innerHTML = DB.currentUser ? `<i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard` : `<i data-lucide="lock" class="w-4 h-4"></i> Admin Login`;
+            }
+
+            switch (page) {
+                case 'home': renderHome(main); break;
+                case 'dpt': renderDPT(main); break;
+                case 'cek-dpt': renderCekDPT(main); break;
+                case 'calon': renderCalon(main); break;
+                case 'calon-detail': renderCalonDetail(main, param); break;
+                case 'panitia': renderPanitia(main); break;
+                case 'berita': renderBerita(main); break;
+                case 'berita-detail': renderBeritaDetail(main, param); break;
+                case 'jadwal': renderJadwal(main); break;
+                case 'informasi': renderInformasi(main); break;
+                case 'kontak': renderKontak(main); break;
+                case 'admin-login': renderAdminLogin(main); break;
+                case 'admin-dashboard':
+                    if (!DB.currentUser) {
+                        renderAdminLogin(main);
+                    } else {
+                        if(param) DB.activeAdminTab = param;
+                        renderAdminDashboard(main, DB.activeAdminTab);
+                    }
+                    break;
+                default: renderHome(main);
+            }
+            lucide.createIcons();
+        }
+
+        // UTILITY FUNCTIONS
+        function maskNIK(nik) {
+            if (!nik || nik.length < 16) return "5271********1234";
+            return nik.substring(0, 4) + "********" + nik.substring(12);
+        }
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function addAuditLog(action, details) {
+            const now = new Date();
+            const timestamp = now.toISOString().replace('T', ' ').substring(0, 19);
+            DB.auditLogs.unshift({
+                id: DB.auditLogs.length + 1,
+                time: timestamp,
+                user: DB.currentUser ? DB.currentUser.name : "System",
+                action: action,
+                details: details
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+        }
+
+        // --- PUBLIC PAGE RENDERING FUNCTIONS ---
+
+        // 1. HOME PAGE
+        function renderHome(container) {
+            const votingDate = new Date("2026-12-09T07:00:00").getTime();
+            container.innerHTML = `
+                <!-- HERO SECTION -->
+                <section class="relative bg-gradient-to-br from-primary-900 via-primary-800 to-slate-900 text-white py-20 px-4 overflow-hidden">
+                    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                    <div class="max-w-7xl mx-auto text-center relative z-10">
+                        <span class="inline-block px-4 py-1.5 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold tracking-wider uppercase mb-4 border border-amber-500/30">
+                            Portal Resmi Informasi Pemilihan Kepala Desa
+                        </span>
+                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-heading leading-tight mb-4">
+                            PEMILIHAN KEPALA DESA GEGERUNG<br/><span class="text-amber-400">TAHUN 2026</span>
+                        </h1>
+                        <p class="text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto mb-8 font-light">
+                            Transparan, Demokratis, dan Partisipatif demi Kemajuan Desa Gegerung
+                        </p>
+
+                        <!-- COUNTDOWN TIMER -->
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl max-w-2xl mx-auto mb-10 shadow-xl">
+                            <h3 class="text-sm font-semibold uppercase tracking-wider text-amber-300 mb-4 font-heading">Hitung Mundur Pemungutan Suara (9 Desember 2026)</h3>
+                            <div class="grid grid-cols-4 gap-4 text-center" id="countdown-timer">
+                                <div class="bg-primary-950/60 p-3 rounded-lg border border-primary-700/50">
+                                    <span id="cd-days" class="text-2xl sm:text-4xl font-bold font-heading text-white">00</span>
+                                    <span class="block text-xs text-slate-300 mt-1">Hari</span>
+                                </div>
+                                <div class="bg-primary-950/60 p-3 rounded-lg border border-primary-700/50">
+                                    <span id="cd-hours" class="text-2xl sm:text-4xl font-bold font-heading text-white">00</span>
+                                    <span class="block text-xs text-slate-300 mt-1">Jam</span>
+                                </div>
+                                <div class="bg-primary-950/60 p-3 rounded-lg border border-primary-700/50">
+                                    <span id="cd-minutes" class="text-2xl sm:text-4xl font-bold font-heading text-white">00</span>
+                                    <span class="block text-xs text-slate-300 mt-1">Menit</span>
+                                </div>
+                                <div class="bg-primary-950/60 p-3 rounded-lg border border-primary-700/50">
+                                    <span id="cd-seconds" class="text-2xl sm:text-4xl font-bold font-heading text-white">00</span>
+                                    <span class="block text-xs text-slate-300 mt-1">Detik</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- QUICK BUTTONS -->
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <button onclick="navigateTo('cek-dpt')" class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-amber-500/20 transition flex items-center gap-2">
+                                <i data-lucide="user-check" class="w-5 h-5"></i> Cek DPT Online
+                            </button>
+                            <button onclick="navigateTo('calon')" class="px-6 py-3.5 bg-white text-primary-900 hover:bg-slate-100 font-semibold rounded-xl shadow-lg transition flex items-center gap-2">
+                                <i data-lucide="users" class="w-5 h-5"></i> Lihat Candidate Calon
+                            </button>
+                            <button onclick="navigateTo('jadwal')" class="px-6 py-3.5 bg-primary-800/80 hover:bg-primary-800 border border-primary-600 text-white font-semibold rounded-xl transition flex items-center gap-2">
+                                <i data-lucide="calendar" class="w-5 h-5"></i> Jadwal Pilkades
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STATISTIK SECTION -->
+                <section class="max-w-7xl mx-auto px-4 -mt-8 relative z-20">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 flex items-center gap-4">
+                            <div class="p-3 bg-emerald-100 text-emerald-600 rounded-xl">
+                                <i data-lucide="map-pin" class="w-8 h-8"></i>
+                            </div>
+                            <div>
+                                <div class="text-2xl sm:text-3xl font-bold font-heading text-slate-900 dark:text-white">${DB.dusuns.length}</div>
+                                <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Jumlah Dusun</div>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 flex items-center gap-4">
+                            <div class="p-3 bg-amber-100 text-amber-600 rounded-xl">
+                                <i data-lucide="award" class="w-8 h-8"></i>
+                            </div>
+                            <div>
+                                <div class="text-2xl sm:text-3xl font-bold font-heading text-slate-900 dark:text-white">${DB.candidates.length}</div>
+                                <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Kandidat Calon</div>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 flex items-center gap-4">
+                            <div class="p-3 bg-blue-100 text-blue-600 rounded-xl">
+                                <i data-lucide="users" class="w-8 h-8"></i>
+                            </div>
+                            <div>
+                                <div class="text-2xl sm:text-3xl font-bold font-heading text-slate-900 dark:text-white">${DB.totalDpt.total.toLocaleString('id-ID')}</div>
+                                <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Total Pemilih (DPT)</div>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 flex items-center gap-4">
+                            <div class="p-3 bg-purple-100 text-purple-600 rounded-xl">
+                                <i data-lucide="calendar-check" class="w-8 h-8"></i>
+                            </div>
+                            <div>
+                                <div class="text-base sm:text-lg font-bold font-heading text-slate-900 dark:text-white">09 Des 2026</div>
+                                <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Pemungutan Suara</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- INFORMASI TERBARU & JADWAL TERDEKAT -->
+                <section class="max-w-7xl mx-auto px-4 py-16">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                        <div class="lg:col-span-2 space-y-6">
+                            <div class="flex justify-between items-end border-b border-slate-200 dark:border-slate-800 pb-4">
+                                <div>
+                                    <h2 class="text-2xl font-bold font-heading text-slate-900 dark:text-white">Informasi Terbaru</h2>
+                                    <p class="text-sm text-slate-500">Berita dan pengumuman resmi dari panitia</p>
+                                </div>
+                                <button onclick="navigateTo('berita')" class="text-primary-600 dark:text-primary-400 font-semibold text-sm hover:underline flex items-center gap-1">
+                                    Lihat Semua <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                ${DB.news.map(n => `
+                                    <div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                                        <div>
+                                            <div class="h-44 bg-slate-200 dark:bg-slate-700 overflow-hidden relative">
+                                                ${n.image ? `<img src="${n.image}" alt="${n.title}" class="w-full h-full object-cover">` : `<div class="w-full h-full flex items-center justify-center text-slate-400"><i data-lucide="newspaper" class="w-12 h-12"></i></div>`}
+                                            </div>
+                                            <div class="p-5">
+                                                <span class="inline-block px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 mb-2">${n.category}</span>
+                                                <h3 class="font-bold text-base mb-2 line-clamp-2 hover:text-primary-600 transition cursor-pointer" onclick="navigateTo('berita-detail', ${n.id})">${n.title}</h3>
+                                                <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">${n.content}</p>
+                                            </div>
+                                        </div>
+                                        <div class="px-5 pb-5 pt-0">
+                                            <div class="flex justify-between items-center text-xs text-slate-400 border-t border-slate-100 dark:border-slate-700/50 pt-3">
+                                                <span><i data-lucide="calendar" class="w-3 h-3 inline mr-1"></i>${n.date}</span>
+                                                <button onclick="navigateTo('berita-detail', ${n.id})" class="text-primary-600 font-semibold hover:underline">Baca Selengkapnya</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+                                <h2 class="text-2xl font-bold font-heading text-slate-900 dark:text-white">Agenda Terdekat</h2>
+                                <p class="text-sm text-slate-500">Jadwal tahapan Pilkades terkini</p>
+                            </div>
+
+                            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                                ${DB.schedules.slice(3, 6).map(s => `
+                                    <div class="p-4 rounded-xl border border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <span class="px-2 py-0.5 rounded text-xs font-semibold ${s.status === 'Sedang Berlangsung' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' : 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300'}">
+                                                ${s.status}
+                                            </span>
+                                            <span class="text-xs text-slate-400"><i data-lucide="clock" class="w-3 h-3 inline mr-1"></i>${s.time}</span>
+                                        </div>
+                                        <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-1">${s.title}</h4>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2">${s.desc}</p>
+                                        <div class="text-xs text-slate-400 font-medium">
+                                            <i data-lucide="map-pin" class="w-3 h-3 inline mr-1"></i>${s.location}
+                                        </div>
+                                    </div>
+                                `).join('')}
+
+                                <button onclick="navigateTo('jadwal')" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-800 dark:text-white text-xs font-semibold rounded-lg transition text-center block">
+                                    Lihat Seluruh Timeline
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+
+            const interval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = votingDate - now;
+
+                if (distance < 0) {
+                    clearInterval(interval);
+                    return;
+                }
+
+                const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+                const elD = document.getElementById('cd-days');
+                const elH = document.getElementById('cd-hours');
+                const elM = document.getElementById('cd-minutes');
+                const elS = document.getElementById('cd-seconds');
+
+                if (elD) elD.innerText = String(d).padStart(2, '0');
+                if (elH) elH.innerText = String(h).padStart(2, '0');
+                if (elM) elM.innerText = String(m).padStart(2, '0');
+                if (elS) elS.innerText = String(s).padStart(2, '0');
+            }, 1000);
+        }
+
+        // 2. HALAMAN DPT
+        function renderDPT(container) {
+            const totalL = DB.totalDpt.l;
+            const totalP = DB.totalDpt.p;
+            const totalDpt = DB.totalDpt.total;
+            const pctL = ((totalL / totalDpt) * 100).toFixed(1);
+            const pctP = ((totalP / totalDpt) * 100).toFixed(1);
+
+            container.innerHTML = `
+                <section class="max-w-7xl mx-auto px-4 py-10">
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold font-heading text-slate-900 dark:text-white">DAFTAR PEMILIH TETAP (DPT)</h1>
+                        <p class="text-slate-500 dark:text-slate-400">Pilkades Desa Gegerung Tahun 2026 (${DB.dusuns.length} Wilayah Dusun) - Total DPT: ${totalDpt.toLocaleString('id-ID')} Pemilih</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm md:col-span-2">
+                            <h3 class="font-bold text-slate-800 dark:text-white mb-4 font-heading">Rekapitulasi Pemilih Per Dusun</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                ${DB.dusuns.map(d => `
+                                    <div class="bg-slate-50 dark:bg-slate-900/60 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
+                                        <span class="text-xs text-slate-400 font-medium block truncate">${d.nama}</span>
+                                        <span class="text-lg font-bold font-heading text-primary-600 dark:text-primary-400">${d.dpt.toLocaleString('id-ID')} Pemilih</span>
+                                        <span class="text-[10px] text-slate-400 block mt-0.5">DPS: ${d.dps} +${d.tambahan}</span>
+                                        <span class="text-[10px] text-slate-500 font-medium block">L:${d.l} &nbsp &nbspP:${d.p}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-bold text-slate-800 dark:text-white mb-2 font-heading">Rasio Gender DPT</h3>
+                                <p class="text-xs text-slate-500 mb-4">Total Pemilih Terdaftar secara Keseluruhan</p>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1">
+                                        <span>Laki-Laki (${pctL}%)</span>
+                                        <span>${totalL.toLocaleString('id-ID')} Pemilih</span>
+                                    </div>
+                                    <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                                        <div class="bg-blue-600 h-full" style="width: ${pctL}%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1">
+                                        <span>Perempuan (${pctP}%)</span>
+                                        <span>${totalP.toLocaleString('id-ID')} Pemilih</span>
+                                    </div>
+                                    <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                                        <div class="bg-pink-500 h-full" style="width: ${pctP}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+                        <div class="p-6 border-b border-slate-200 dark:border-slate-700 flex flex-wrap gap-4 justify-between items-center">
+                            <div class="flex flex-wrap gap-3 items-center w-full md:w-auto">
+                                <input type="text" id="dpt-search" onkeyup="filterDPTTable()" placeholder="Cari Nama / No DPT..." class="px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:border-primary-500 w-full md:w-64">
+                                <select id="dpt-filter-dusun" onchange="filterDPTTable()" class="px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:border-primary-500">
+                                    <option value="">Semua Dusun</option>
+                                    ${DB.dusuns.map(d => `<option value="${d.nama}">${d.nama}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="text-xs text-slate-500">
+                                Info Privasi: <span class="text-amber-600 font-medium">NIK disamarkan demi keamanan data pribadi.</span>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse" id="public-dpt-table">
+                                <thead>
+                                    <tr class="bg-slate-50 dark:bg-slate-900/80 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200 dark:border-slate-700">
+                                        <th class="p-4">No</th>
+                                        <th class="p-4">No. DPT</th>
+                                        <th class="p-4">NIK (Masked)</th>
+                                        <th class="p-4">Nama Pemilih</th>
+                                        <th class="p-4">L/P</th>
+                                        <th class="p-4">Dusun</th>
+                                        <th class="p-4">TPS</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50 text-sm">
+                                    ${DB.voters.map((v, i) => `
+                                        <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition">
+                                            <td class="p-4 text-slate-400">${i + 1}</td>
+                                            <td class="p-4 font-mono font-semibold text-primary-600 dark:text-primary-400">${v.nomor_dpt}</td>
+                                            <td class="p-4 font-mono text-slate-500">${maskNIK(v.nik)}</td>
+                                            <td class="p-4 font-semibold text-slate-800 dark:text-slate-100">${v.nama}</td>
+                                            <td class="p-4">${v.jk === 'L' ? '<span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">L</span>' : '<span class="px-2 py-0.5 bg-pink-100 text-pink-700 rounded text-xs">P</span>'}</td>
+                                            <td class="p-4 text-slate-600 dark:text-slate-300">${v.dusun}</td>
+                                            <td class="p-4 font-medium text-slate-700 dark:text-slate-300">${v.tps}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="p-4 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center text-xs text-slate-500">
+                            <span>Menampilkan ${DB.voters.length} sampel dari total ${totalDpt.toLocaleString('id-ID')} DPT terdaftar</span>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        function filterDPTTable() {
+            const query = document.getElementById('dpt-search').value.toLowerCase();
+            const dusun = document.getElementById('dpt-filter-dusun').value;
+            const rows = document.querySelectorAll('#public-dpt-table tbody tr');
+
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                const matchesSearch = text.includes(query);
+                const matchesDusun = dusun === "" || text.includes(dusun.toLowerCase());
+
+                if (matchesSearch && matchesDusun) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // 3. HALAMAN CEK DPT OTOMATIS
+        function renderCekDPT(container) {
+            container.innerHTML = `
+                <section class="max-w-3xl mx-auto px-4 py-16">
+                    <div class="text-center mb-10">
+                        <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="shield-check" class="w-8 h-8"></i>
+                        </div>
+                        <h1 class="text-3xl font-bold font-heading text-slate-900 dark:text-white">CEK STATUS DPT MANDIRI</h1>
+                        <p class="text-slate-500 dark:text-slate-400 mt-2">Apakah Anda Terdaftar sebagai Pemilih dalam Pilkades Gegerung 2026?</p>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700 shadow-lg">
+                        <form id="cek-dpt-form" onsubmit="handleCekDPT(event)" class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Masukkan NIK atau Nomor DPT</label>
+                                <input type="text" id="search-input" required placeholder="Contoh: 5271010101900001 atau DPT-001" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono text-sm">
+                                <span class="text-xs text-slate-400 mt-1 block">Sistem menggunakan perlindungan enkripsi & proteksi rate limiting.</span>
+                            </div>
+
+                            <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" id="captcha" required class="w-5 h-5 text-amber-600 rounded focus:ring-amber-500">
+                                    <label for="captcha" class="text-sm text-slate-600 dark:text-slate-300">Saya bukan robot (Anti-Bot Verification)</label>
+                                </div>
+                                <i data-lucide="shield" class="w-5 h-5 text-slate-400"></i>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition shadow-md flex items-center justify-center gap-2">
+                                <i data-lucide="search" class="w-5 h-5"></i> Periksa Status Terdaftar
+                            </button>
+                        </form>
+
+                        <div id="cek-result" class="mt-8 hidden"></div>
+                    </div>
+                </section>
+            `;
+        }
+
+        function handleCekDPT(e) {
+            e.preventDefault();
+            const input = document.getElementById('search-input').value.trim();
+            const resultDiv = document.getElementById('cek-result');
+            resultDiv.classList.remove('hidden');
+
+            const found = DB.voters.find(v => v.nik === input || v.nomor_dpt.toLowerCase() === input.toLowerCase());
+
+            if (found) {
+                resultDiv.innerHTML = `
+                    <div class="p-6 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl text-emerald-900 dark:text-emerald-200 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check-circle-2" class="w-8 h-8 text-emerald-600 dark:text-emerald-400"></i>
+                            <div>
+                                <h4 class="font-bold text-lg font-heading">ANDA TERDAFTAR SEBAGAI PEMILIH</h4>
+                                <p class="text-xs text-emerald-700 dark:text-emerald-300">Data Anda cocok dengan Daftar Pemilih Tetap (DPT) resmi.</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 text-sm pt-4 border-t border-emerald-200 dark:border-emerald-800">
+                            <div>
+                                <span class="text-xs text-slate-500 dark:text-slate-400 block">Nama Pemilih</span>
+                                <span class="font-bold">${found.nama}</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-500 dark:text-slate-400 block">Nomor DPT</span>
+                                <span class="font-mono font-bold">${found.nomor_dpt}</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-500 dark:text-slate-400 block">Wilayah Dusun</span>
+                                <span class="font-semibold">${found.dusun}</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-500 dark:text-slate-400 block">Lokasi TPS</span>
+                                <span class="font-bold text-amber-600 dark:text-amber-400">${found.tps}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="p-6 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 rounded-xl text-rose-900 dark:text-rose-200 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="alert-circle" class="w-8 h-8 text-rose-600 dark:text-rose-400"></i>
+                            <div>
+                                <h4 class="font-bold text-lg font-heading">DATA PEMILIH TIDAK DITEMUKAN</h4>
+                                <p class="text-xs text-rose-700 dark:text-rose-300">NIK atau Nomor DPT tidak terdaftar dalam database DPT.</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pt-2">
+                            Pastikan NIK atau Nomor DPT yang dimasukkan benar. Untuk informasi lebih lanjut atau tanggapan DPT, silakan menghubungi Sekretariat Panitia Pilkades Desa Gegerung.
+                        </p>
+                    </div>
+                `;
+            }
+            lucide.createIcons();
+        }
+
+        // 4. HALAMAN CALON KEPALA DESA
+        function renderCalon(container) {
+            container.innerHTML = `
+                <section class="max-w-7xl mx-auto px-4 py-12">
+                    <div class="text-center max-w-2xl mx-auto mb-12">
+                        <h1 class="text-3xl font-bold font-heading text-slate-900 dark:text-white">CALON KEPALA DESA GEGERUNG 2026</h1>
+                        <p class="text-slate-500 dark:text-slate-400 mt-2">Mengenal Visi, Misi, dan Program Kerja Kandidat Pemimpin Desa Gegerung</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        ${DB.candidates.map(c => `
+                            <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col justify-between">
+                                <div>
+                                    <div class="relative bg-gradient-to-b from-primary-900 to-primary-800 p-6 text-center text-white">
+                                        <span class="absolute top-4 left-4 w-12 h-12 rounded-full bg-amber-400 text-primary-900 font-bold font-heading text-xl flex items-center justify-center shadow-lg border-2 border-white">
+                                            ${c.nomor_urut}
+                                        </span>
+                                        <img src="${c.photo}" alt="${c.nama}" class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-white shadow-md my-2">
+                                        <h3 class="font-bold text-xl font-heading mt-2">${c.nama}</h3>
+                                        <span class="text-xs text-amber-300">Calon Kepala Desa</span>
+                                    </div>
+                                    <div class="p-6 space-y-4">
+                                        <div>
+                                            <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">VISI</h4>
+                                            <p class="text-sm font-medium text-slate-700 dark:text-slate-200 italic">"${c.visi}"</p>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">PROGRAM KERJA UNGGULAN</h4>
+                                            <p class="text-xs text-slate-600 dark:text-slate-300">${c.program}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-6 pt-0">
+                                    <button onclick="navigateTo('calon-detail', ${c.id})" class="w-full py-2.5 bg-primary-700 hover:bg-primary-800 text-white font-semibold rounded-xl text-sm transition flex items-center justify-center gap-2">
+                                        Lihat Profil Lengkap <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+            `;
+        }
+
+        function renderCalonDetail(container, id) {
+            const candidate = DB.candidates.find(c => c.id === id) || DB.candidates[0];
+            container.innerHTML = `
+                <section class="max-w-4xl mx-auto px-4 py-12">
+                    <button onclick="navigateTo('calon')" class="mb-6 text-sm text-primary-600 dark:text-primary-400 font-semibold flex items-center gap-1 hover:underline">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Daftar Calon
+                    </button>
+
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl overflow-hidden">
+                        <div class="bg-primary-900 text-white p-8 text-center sm:text-left sm:flex items-center gap-6">
+                            <span class="w-16 h-16 rounded-full bg-amber-400 text-primary-900 font-bold font-heading text-2xl flex items-center justify-center mx-auto sm:mx-0 shadow-lg">
+                                ${candidate.nomor_urut}
+                            </span>
+                            <div class="mt-4 sm:mt-0">
+                                <h1 class="text-2xl sm:text-3xl font-bold font-heading">${candidate.nama}</h1>
+                                <p class="text-amber-300 text-sm">Kandidat Nomor Urut ${candidate.nomor_urut} Pilkades Gegerung 2026</p>
+                            </div>
+                        </div>
+
+                        <div class="p-6 sm:p-8 space-y-8">
+                            <div class="flex flex-col sm:flex-row gap-6 items-center sm:items-start border-b border-slate-200 dark:border-slate-700 pb-6">
+                                <img src="${candidate.photo}" class="w-44 h-44 rounded-2xl object-cover border-2 border-slate-200 dark:border-slate-700">
+                                <div class="space-y-3 text-sm">
+                                    <h3 class="font-bold text-lg font-heading text-slate-800 dark:text-white">Biodata Singkat Resmi</h3>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 dark:text-slate-300">
+                                        <div><strong class="text-slate-800 dark:text-slate-200">Jabatan Dicalonkan:</strong> Kepala Desa</div>
+                                        <div><strong class="text-slate-800 dark:text-slate-200">Status Pengesahan:</strong> Memenuhi Syarat (MS)</div>
+                                        <div><strong class="text-slate-800 dark:text-slate-200">Wilayah Domisili:</strong> Desa Gegerung</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <h3 class="font-bold text-lg font-heading text-primary-700 dark:text-primary-400 flex items-center gap-2">
+                                    <i data-lucide="target" class="w-5 h-5"></i> VISI KANDIDAT
+                                </h3>
+                                <p class="text-slate-700 dark:text-slate-200 text-base italic p-4 bg-slate-50 dark:bg-slate-900/60 rounded-xl border border-slate-200 dark:border-slate-700">
+                                    "${candidate.visi}"
+                                </p>
+                            </div>
+
+                            <div class="space-y-3">
+                                <h3 class="font-bold text-lg font-heading text-primary-700 dark:text-primary-400 flex items-center gap-2">
+                                    <i data-lucide="list-checks" class="w-5 h-5"></i> MISI KANDIDAT
+                                </h3>
+                                <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                                    ${(Array.isArray(candidate.misi) ? candidate.misi : [candidate.misi]).map(m => `
+                                        <li class="flex items-start gap-2">
+                                            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500 mt-0.5"></i>
+                                            <span>${m}</span>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+
+                            <div class="space-y-3">
+                                <h3 class="font-bold text-lg font-heading text-primary-700 dark:text-primary-400 flex items-center gap-2">
+                                    <i data-lucide="briefcase" class="w-5 h-5"></i> PROGRAM KERJA UNGGULAN
+                                </h3>
+                                <div class="p-4 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 rounded-xl text-sm text-amber-900 dark:text-amber-200">
+                                    ${candidate.program}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        // 5. HALAMAN PANITIA
+        function renderPanitia(container) {
+            container.innerHTML = `
+                <section class="max-w-7xl mx-auto px-4 py-12">
+                    <div class="text-center max-w-2xl mx-auto mb-12">
+                        <h1 class="text-3xl font-bold font-heading text-slate-900 dark:text-white">STRUKTUR PANITIA PILKADES GEGERUNG</h1>
+                        <p class="text-slate-500 dark:text-slate-400 mt-2">Panitia Pemilihan Kepala Desa Gegerung Tahun 2026</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                        ${DB.committee.map(p => `
+                            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 text-center border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition">
+                                <img src="${p.photo}" class="w-28 h-28 rounded-full mx-auto object-cover mb-4 border-4 border-emerald-100 dark:border-emerald-900">
+                                <h3 class="font-bold text-lg font-heading text-slate-900 dark:text-white">${p.nama}</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 mt-1">
+                                    ${p.jabatan}
+                                </span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+            `;
+        }
+
+        // 6. HALAMAN BERITA
+        function renderBerita(container) {
+            container.innerHTML = `
+                <section class="max-w-7xl mx-auto px-4 py-12">
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold font-heading text-slate-900 dark:text-white">BERITA & KEGIATAN PILKADES</h1>
+                        <p class="text-slate-500 dark:text-slate-400">Informasi Seputar Pelaksanaan Pilkades Desa Gegerung 2026</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        ${DB.news.map(n => `
+                            <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                                <div>
+                                    <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden relative">
+                                        ${n.image ? `<img src="${n.image}" alt="${n.title}" class="w-full h-full object-cover">` : `<div class="w-full h-full flex items-center justify-center text-slate-400"><i data-lucide="image" class="w-12 h-12"></i></div>`}
+                                    </div>
+                                    <div class="p-6">
+                                        <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+                                            <span class="px-2 py-0.5 rounded bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-300 font-semibold">${n.category}</span>
+                                            <span>${n.date}</span>
+                                        </div>
+                                        <h3 class="font-bold text-lg mb-2 font-heading text-slate-900 dark:text-white">${n.title}</h3>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-3 mb-4">${n.content}</p>
+                                    </div>
+                                </div>
+                                <div class="px-6 pb-6 pt-0">
+                                    <button onclick="navigateTo('berita-detail', ${n.id})" class="text-primary-600 dark:text-primary-400 font-semibold text-xs hover:underline flex items-center gap-1">
+                                        Baca Artikel Lengkap <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+            `;
+        }
+
+        function renderBeritaDetail(container, id) {
+            const newsItem = DB.news.find(n => n.id === id) || DB.news[0];
+            container.innerHTML = `
+                <section class="max-w-4xl mx-auto px-4 py-12">
+                    <button onclick="navigateTo('berita')" class="mb-6 text-sm text-primary-600 font-semibold flex items-center gap-1 hover:underline">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Berita
+                    </button>
+                    <article class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-8 shadow-sm space-y-6">
+                        <span class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-semibold">${newsItem.category}</span>
+                        <h1 class="text-3xl font-bold font-heading text-slate-900 dark:text-white">${newsItem.title}</h1>
+                        <div class="text-xs text-slate-400 flex items-center gap-4 border-y border-slate-100 dark:border-slate-700 py-3">
+                            <span>Oleh: <strong>${newsItem.author}</strong></span>
+                            <span>•</span>
+                            <span>Tanggal: <strong>${newsItem.date}</strong></span>
+                        </div>
+                        <div class="h-80 bg-slate-200 dark:bg-slate-700 rounded-xl overflow-hidden relative">
+                            ${newsItem.image ? `<img src="${newsItem.image}" alt="${newsItem.title}" class="w-full h-full object-cover">` : `<div class="w-full h-full flex items-center justify-center text-slate-400"><i data-lucide="newspaper" class="w-16 h-16"></i></div>`}
+                        </div>
+                        <p class="text-slate-700 dark:text-slate-300 leading-relaxed text-sm whitespace-pre-line">${newsItem.content}</p>
+                    </article>
+                </section>
+            `;
+        }
+
+        // 7. HALAMAN JADWAL
+        function renderJadwal(container) {
+            container.innerHTML = `
+                <section class="max-w-5xl mx-auto px-4 py-12">
+                    <div class="mb-10 text-center">
+                        <h1 class="text-3xl font-bold font-heading text-slate-900 dark:text-white">JADWAL PELAKSANAAN PILKADES 2026</h1>
+                        <p class="text-slate-500 dark:text-slate-400 mt-1">Timeline resmi tahapan Pemilihan Kepala Desa Gegerung</p>
+                    </div>
+
+                    <div class="relative border-l-2 border-primary-500/30 ml-4 sm:ml-32 space-y-8">
+                        ${DB.schedules.map(s => {
+                            let statusBadge = '';
+                            if (s.status === 'Selesai') statusBadge = '<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">🟢 Selesai</span>';
+                            else if (s.status === 'Sedang Berlangsung') statusBadge = '<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 animate-pulse">🟡 Sedang Berlangsung</span>';
+                            else statusBadge = '<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">🔵 Akan Datang</span>';
+
+                            return `
+                                <div class="relative pl-6 sm:pl-8">
+                                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-primary-600 border-4 border-white dark:border-slate-900"></div>
+                                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                                        <div class="flex flex-wrap justify-between items-start gap-2">
+                                            <h3 class="font-bold text-lg font-heading text-slate-900 dark:text-white">${s.title}</h3>${statusBadge}
+                                        </div>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400">${s.desc}</p>
+                                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs text-slate-600 dark:text-slate-300 pt-2 border-t border-slate-100 dark:border-slate-700/50">
+                                            <div><strong>Tanggal:</strong> ${s.start_date} s/d ${s.end_date}</div>
+                                            <div><strong>Waktu:</strong> ${s.time}</div>
+                                            <div><strong>Lokasi:</strong> ${s.location}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </section>
+            `;
+        }
+
+        // 8. HALAMAN INFORMASI & REGULASI
+        function renderInformasi(container) {
+            container.innerHTML = `
+                <section class="max-w-7xl mx-auto px-4 py-12">
+                    <div class="mb-10">
+                        <h1 class="text-3xl font-bold font-heading text-slate-900 dark:text-white">INFORMASI & REGULASI PILKADES</h1>
+                        <p class="text-slate-500 dark:text-slate-400">Dasar Hukum, Ketentuan Pemilih, dan Dokumen Pengumuman Resmi</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2 space-y-6">
+                            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                                <h3 class="font-bold text-lg font-heading text-primary-700 dark:text-primary-400">Dasar Hukum Pelaksanaan</h3>
+                                <ul class="list-disc list-inside text-xs text-slate-600 dark:text-slate-300 space-y-2">
+                                    <li>UU NO. 3 TH. 2024 TTG PERUBAHAN KEDUA ATAS UU NO. 6 TH. 2014 TTG DESA</li>
+                                    <li>PP 16 TH. 2026 TTG PETUNJUK PELAKSANAAN UU NO. 6 TH. 2014 TTG DESA</li>
+                                    <li>PERDA NO. 10 TH. 2018 TTG PERUBAHAN ATAS PERDA NO. 1 TH. 2016 TTG PENGATURAN DESA</li>
+                                    <li>PERBUP NO. 20 TH. 2021 TTG PEMILIHAN KEPALA DESA</li>
+                                    <li>PERBUP NO. 79 TH. 2026 TTG PERUBAHAN KELIMA ATAS PERBUP NO. 20 TAHUN 2021 TENTANG PEMILIHAN KEPALA DESA</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                                <h3 class="font-bold text-lg font-heading text-primary-700 dark:text-primary-400">Syarat & Ketentuan Pemilih</h3>
+                                <div class="text-xs text-slate-600 dark:text-slate-300 space-y-2 leading-relaxed">
+                                    <p>1. Warga Negara Republik Indonesia berdomisili di Desa Gegerung dibuktikan dengan e-KTP.</p>
+                                    <p>2. Berusia minimal 17 tahun pada hari pemungutan suara atau sudah pernah menikah.</p>
+                                    <p>3. Nyata-nyata tidak sedang terganggu jiwa/ingatannya.</p>
+                                    <p>4. Terdaftar dalam Daftar Pemilih Tetap (DPT) resmi Panitia.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4 h-fit">
+                            <h3 class="font-bold text-lg font-heading text-slate-900 dark:text-white flex items-center gap-2">
+                                <i data-lucide="file-text" class="w-5 h-5 text-amber-500"></i> Download Dokumen
+                            </h3>
+                            <div class="space-y-3">
+                                ${DB.announcements.map(a => `
+                                    <div class="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-bold text-xs text-slate-800 dark:text-slate-200">${a.title}</h4>
+                                            <span class="text-[10px] text-slate-400">${a.date}</span>
+                                        </div>
+                                        <button onclick="alert('Mengunduh dokumen PDF: ${a.file}')" class="p-2 text-primary-600 hover:bg-primary-50 rounded-lg">
+                                            <i data-lucide="download" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        // 9. HALAMAN KONTAK
+        function renderKontak(container) {
+            container.innerHTML = `
+                <section class="max-w-7xl mx-auto px-4 py-12">
+                    <div class="mb-10 text-center max-w-2xl mx-auto">
+                        <h1 class="text-3xl font-bold font-heading text-slate-900 dark:text-white">KONTAK PANITIA PILKADES</h1>
+                        <p class="text-slate-500 dark:text-slate-400 mt-1">Layanan Informasi & Pengaduan Masyarakat Desa Gegerung</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                        <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+                            <h3 class="font-bold text-xl font-heading text-slate-900 dark:text-white">Sekretariat Panitia</h3>
+                            
+                            <div class="space-y-4 text-sm text-slate-600 dark:text-slate-300">
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="map-pin" class="w-5 h-5 text-amber-500 mt-1"></i>
+                                    <div>
+                                        <strong>Alamat Lengkap:</strong><br/>
+                                        Kantor Desa Gegerung, Kec. Lingsar, Kabupaten Lombok Barat, NTB 83371
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="phone" class="w-5 h-5 text-amber-500"></i>
+                                    <div>
+                                        <strong>WhatsApp Resmi:</strong> +62 85205133314
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="clock" class="w-5 h-5 text-amber-500"></i>
+                                    <div>
+                                        <strong>Jam Layanan:</strong> Senin - Sabtu (08:00 - 16:00 WITA)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="https://wa.me/6285205133314" target="_blank" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition flex items-center justify-center gap-2">
+                                <i data-lucide="message-square" class="w-5 h-5"></i> Hubungi Panitia via WhatsApp
+                            </a>
+                        </div>
+
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm flex flex-col justify-between p-6">
+                            <h3 class="font-bold text-lg font-heading text-slate-900 dark:text-white mb-4">Peta Lokasi Sekretariat</h3>
+                            <div class="w-full h-64 bg-slate-200 dark:bg-slate-700 rounded-xl flex flex-col items-center justify-center text-slate-400 gap-2">
+                                <i data-lucide="map" class="w-12 h-12"></i>
+                                <span class="text-xs">Google Maps API Frame Embed (Desa Gegerung)</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        // 10. HALAMAN LOGIN ADMIN
+        function renderAdminLogin(container) {
+            container.innerHTML = `
+                <section class="max-w-md mx-auto px-4 py-20">
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-xl">
+                        <div class="text-center mb-6">
+                            <div class="w-12 h-12 bg-primary-700 text-white rounded-full flex items-center justify-center mx-auto mb-2 font-bold">
+                                <i data-lucide="lock" class="w-6 h-6"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold font-heading text-slate-900 dark:text-white">PORTAL LOGIN ADMIN</h2>
+                            <p class="text-xs text-slate-500">Sistem Informasi Pilkades Gegerung 2026</p>
+                        </div>
+
+                        <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Username / Email</label>
+                                <input type="text" id="admin-user" required value="admin" class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:border-primary-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Password</label>
+                                <input type="password" id="admin-pass" required value="admin123" class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:border-primary-500">
+                            </div>
+                            <div class="text-xs text-slate-400 italic">
+                                *Kredensial otomatis diisi untuk kebutuhan demo.
+                            </div>
+                            <button type="submit" class="w-full py-3 bg-primary-700 hover:bg-primary-800 text-white font-semibold rounded-lg text-sm transition shadow-md">
+                                Masuk ke Dashboard
+                            </button>
+                        </form>
+                    </div>
+                </section>
+            `;
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            DB.currentUser = { name: "Panitia Utama", role: "SUPER ADMIN" };
+            addAuditLog("Admin Login", "Berhasil masuk ke panel administrator");
+            navigateTo('admin-dashboard', 'overview');
+        }
+
+        // --- COMPLETE ADMIN DASHBOARD MANAGEMENT (CRUD + QUICK COUNT) ---
+        function renderAdminDashboard(container, tab = 'overview') {
+            container.innerHTML = `
+                <section class="max-w-7xl mx-auto px-4 py-8">
+                    <!-- Dashboard Header -->
+                    <div class="bg-primary-900 text-white p-6 rounded-2xl mb-8 flex flex-wrap justify-between items-center gap-4 shadow-lg">
+                        <div>
+                            <span class="px-2.5 py-1 bg-amber-500 text-slate-900 rounded-md text-xs font-bold uppercase tracking-wider">${DB.currentUser.role}</span>
+                            <h1 class="text-2xl font-bold font-heading mt-1">DASHBOARD ADMINISTRATOR</h1>
+                            <p class="text-xs text-slate-300">Selamat datang kembali, ${DB.currentUser.name}</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button onclick="navigateTo('home')" class="px-4 py-2 bg-primary-800 hover:bg-primary-700 text-white text-xs font-semibold rounded-lg transition border border-primary-700">
+                                Pratinjau Website
+                            </button>
+                            <button onclick="DB.currentUser=null; addAuditLog('Logout', 'Admin keluar dari sistem'); navigateTo('home')" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-lg transition shadow">
+                                Keluar (Logout)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Tabs Admin -->
+                    <div class="flex border-b border-slate-200 dark:border-slate-700 mb-6 overflow-x-auto gap-2 text-sm font-semibold">
+                        <button onclick="navigateTo('admin-dashboard', 'overview')" class="px-4 py-3 border-b-2 whitespace-nowrap transition ${tab === 'overview' ? 'border-primary-600 text-primary-600 dark:text-primary-400' : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'}">
+                            <i data-lucide="bar-chart-3" class="w-4 h-4 inline mr-1"></i> Ringkasan & Quick Count
+                        </button>
+                        <button onclick="navigateTo('admin-dashboard', 'calon')" class="px-4 py-3 border-b-2 whitespace-nowrap transition ${tab === 'calon' ? 'border-primary-600 text-primary-600 dark:text-primary-400' : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'}">
+                            <i data-lucide="users" class="w-4 h-4 inline mr-1"></i> Kelola Calon Kades
+                        </button>
+                        <button onclick="navigateTo('admin-dashboard', 'berita')" class="px-4 py-3 border-b-2 whitespace-nowrap transition ${tab === 'berita' ? 'border-primary-600 text-primary-600 dark:text-primary-400' : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'}">
+                            <i data-lucide="newspaper" class="w-4 h-4 inline mr-1"></i> Kelola Berita
+                        </button>
+                        <button onclick="navigateTo('admin-dashboard', 'jadwal')" class="px-4 py-3 border-b-2 whitespace-nowrap transition ${tab === 'jadwal' ? 'border-primary-600 text-primary-600 dark:text-primary-400' : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'}">
+                            <i data-lucide="calendar" class="w-4 h-4 inline mr-1"></i> Kelola Jadwal Pilkades
+                        </button>
+                        <button onclick="navigateTo('admin-dashboard', 'dpt')" class="px-4 py-3 border-b-2 whitespace-nowrap transition ${tab === 'dpt' ? 'border-primary-600 text-primary-600 dark:text-primary-400' : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'}">
+                            <i data-lucide="database" class="w-4 h-4 inline mr-1"></i> Data Pemilih (DPT)
+                        </button>
+                        <button onclick="navigateTo('admin-dashboard', 'logs')" class="px-4 py-3 border-b-2 whitespace-nowrap transition ${tab === 'logs' ? 'border-primary-600 text-primary-600 dark:text-primary-400' : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'}">
+                            <i data-lucide="shield-alert" class="w-4 h-4 inline mr-1"></i> Audit Trail & Log
+                        </button>
+                    </div>
+
+                    <!-- TAB CONTENTS -->
+                    <div id="admin-tab-content">
+                        ${getAdminTabContent(tab)}
+                    </div>
+                </section>
+            `;
+
+            if (tab === 'overview') {
+                initQuickCountChart();
+            }
+        }
+
+        function getAdminTabContent(tab) {
+            switch (tab) {
+                case 'overview':
+                    const totalVotes = DB.candidates.reduce((sum, c) => sum + c.votes, 0) + DB.invalidVotes;
+                    return `
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                                    <h4 class="text-xs text-slate-400 font-semibold uppercase">Total Pemilih Terdaftar (DPT)</h4>
+                                    <div class="text-3xl font-bold font-heading text-slate-900 dark:text-white mt-2">${DB.totalDpt.total.toLocaleString('id-ID')}</div>
+                                    <p class="text-xs text-slate-500 mt-1">Sesuai SK Penetapan Resmi</p>
+                                </div>
+                                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                                    <h4 class="text-xs text-slate-400 font-semibold uppercase">Total Suara Masuk</h4>
+                                    <div class="text-3xl font-bold font-heading text-emerald-600 mt-2">${totalVotes.toLocaleString('id-ID')}</div>
+                                    <p class="text-xs text-slate-500 mt-1">Partisipasi: ${((totalVotes / DB.totalDpt.total) * 100).toFixed(1)}%</p>
+                                </div>
+                                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                                    <h4 class="text-xs text-slate-400 font-semibold uppercase">Suara Tidak Sah / Rusak</h4>
+                                    <div class="text-3xl font-bold font-heading text-rose-600 mt-2">${DB.invalidVotes}</div>
+                                    <p class="text-xs text-slate-500 mt-1">Laporan dari 7 TPS</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                                <div class="flex justify-between items-center mb-6">
+                                    <div>
+                                        <h3 class="font-bold text-lg font-heading text-slate-900 dark:text-white">Quick Count - Real-Time Perolehan Suara</h3>
+                                        <p class="text-xs text-slate-500">Visualisasi data perolehan suara sementara tiap kandidat</p>
+                                    </div>
+                                    <button onclick="openModalUpdateVotes()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold rounded-lg shadow transition flex items-center gap-2">
+                                        <i data-lucide="edit" class="w-4 h-4"></i> Input / Update Suara TPS
+                                    </button>
+                                </div>
+                                <div class="h-72 w-full">
+                                    <canvas id="quickCountChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                case 'calon':
+                    return `
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 space-y-6">
+                            <div class="flex flex-wrap justify-between items-center gap-4 border-b border-slate-200 dark:border-slate-700 pb-4">
+                                <div>
+                                    <h3 class="font-bold text-lg font-heading text-slate-900 dark:text-white">Kelola Data Calon Kepala Desa</h3>
+                                    <p class="text-xs text-slate-500">Tambah, ubah, atau hapus profil kandidat Pilkades</p>
+                                </div>
+                                <button onclick="openModalCalon()" class="px-4 py-2 bg-primary-700 hover:bg-primary-800 text-white text-xs font-semibold rounded-lg shadow transition flex items-center gap-2">
+                                    <i data-lucide="plus-circle" class="w-4 h-4"></i> Tambah Calon Baru
+                                </button>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                ${DB.candidates.map(c => `
+                                    <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-slate-50 dark:bg-slate-900/50 flex flex-col justify-between space-y-4">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center gap-4">
+                                                <span class="w-10 h-10 rounded-full bg-amber-500 text-white font-bold font-heading flex items-center justify-center shrink-0">
+                                                    ${c.nomor_urut}
+                                                </span>
+                                                <div class="overflow-hidden">
+                                                    <h4 class="font-bold text-slate-900 dark:text-white truncate">${c.nama}</h4>
+                                                    <span class="text-xs text-slate-400">Suara: ${c.votes}</span>
+                                                </div>
+                                            </div>
+                                            <div class="text-xs text-slate-600 dark:text-slate-300">
+                                                <strong>Visi:</strong>
+                                                <p class="italic line-clamp-2 mt-0.5">${c.visi}</p>
+                                            </div>
+                                            <div class="text-xs text-slate-600 dark:text-slate-300">
+                                                <strong>Program Kerja:</strong>
+                                                <p class="line-clamp-2 mt-0.5">${c.program}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2 pt-3 border-t border-slate-200 dark:border-slate-700/60">
+                                            <button onclick="openModalCalon(${c.id})" class="flex-1 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded text-xs font-semibold transition flex items-center justify-center gap-1">
+                                                <i data-lucide="edit" class="w-3.5 h-3.5"></i> Edit
+                                            </button>
+                                            <button onclick="deleteCalon(${c.id})" class="flex-1 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded text-xs font-semibold transition flex items-center justify-center gap-1">
+                                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Hapus
+                                            </button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                case 'berita':
+                    return `
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 space-y-6">
+                            <div class="flex flex-wrap justify-between items-center gap-4 border-b border-slate-200 dark:border-slate-700 pb-4">
+                                <div>
+                                    <h3 class="font-bold text-lg font-heading text-slate-900 dark:text-white">Kelola Berita & Publikasi</h3>
+                                    <p class="text-xs text-slate-500">Tambah, ubah, atau hapus artikel berita Pilkades</p>
+                                </div>
+                                <button onclick="openModalBerita()" class="px-4 py-2 bg-primary-700 hover:bg-primary-800 text-white text-xs font-semibold rounded-lg shadow transition flex items-center gap-2">
+                                    <i data-lucide="plus-circle" class="w-4 h-4"></i> Tambah Berita Baru
+                                </button>
+                            </div>
+
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse">
+                                    <thead>
+                                        <tr class="bg-slate-50 dark:bg-slate-900 text-xs text-slate-500 uppercase border-b border-slate-200 dark:border-slate-700">
+                                            <th class="p-3">Judul Berita</th>
+                                            <th class="p-3">Kategori</th>
+                                            <th class="p-3">Tanggal</th>
+                                            <th class="p-3">Penulis</th>
+                                            <th class="p-3 text-center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50 text-xs">
+                                        ${DB.news.map(n => `
+                                            <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30">
+                                                <td class="p-3">
+                                                    <div class="font-bold text-slate-800 dark:text-slate-100 line-clamp-1">${n.title}</div>
+                                                    <div class="text-[11px] text-slate-400 line-clamp-1">${n.content}</div>
+                                                </td>
+                                                <td class="p-3">
+                                                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300">
+                                                        ${n.category}
+                                                    </span>
+                                                </td>
+                                                <td class="p-3 font-medium text-slate-600 dark:text-slate-300">${n.date}</td>
+                                                <td class="p-3 text-slate-500">${n.author}</td>
+                                                <td class="p-3 text-center">
+                                                    <div class="flex justify-center gap-1">
+                                                        <button onclick="openModalBerita(${n.id})" class="p-1.5 bg-amber-500 text-white rounded hover:bg-amber-600 transition" title="Edit Berita"><i data-lucide="edit" class="w-3.5 h-3.5"></i></button>
+                                                        <button onclick="deleteBerita(${n.id})" class="p-1.5 bg-rose-600 text-white rounded hover:bg-rose-700 transition" title="Hapus Berita"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    `;
+                case 'jadwal':
+                    return `
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 space-y-6">
+                            <div class="flex flex-wrap justify-between items-center gap-4 border-b border-slate-200 dark:border-slate-700 pb-4">
+                                <div>
+                                    <h3 class="font-bold text-lg font-heading text-slate-900 dark:text-white">Kelola Jadwal & Tahapan Pilkades</h3>
+                                    <p class="text-xs text-slate-500">Atur agenda kegiatan, timeline, dan status pelaksanaan</p>
+                                </div>
+                                <button onclick="openModalJadwal()" class="px-4 py-2 bg-primary-700 hover:bg-primary-800 text-white text-xs font-semibold rounded-lg shadow transition flex items-center gap-2">
+                                    <i data-lucide="plus-circle" class="w-4 h-4"></i> Tambah Jadwal Agenda
+                                </button>
+                            </div>
+
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse">
+                                    <thead>
+                                        <tr class="bg-slate-50 dark:bg-slate-900 text-xs text-slate-500 uppercase border-b border-slate-200 dark:border-slate-700">
+                                            <th class="p-3">Kegiatan / Agenda</th>
+                                            <th class="p-3">Tanggal Pelaksanaan</th>
+                                            <th class="p-3">Waktu & Lokasi</th>
+                                            <th class="p-3">Status</th>
+                                            <th class="p-3 text-center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50 text-xs">
+                                        ${DB.schedules.map(s => `
+                                            <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30">
+                                                <td class="p-3">
+                                                    <div class="font-bold text-slate-800 dark:text-slate-100">${s.title}</div>
+                                                    <div class="text-[11px] text-slate-400">${s.desc}</div>
+                                                </td>
+                                                <td class="p-3 font-medium">${s.start_date} s/d${s.end_date}</td>
+                                                <td class="p-3">
+                                                    <div>${s.time}</div>
+                                                    <div class="text-slate-400">${s.location}</div>
+                                                </td>
+                                                <td class="p-3">
+                                                    <span class="px-2 py-1 rounded text-[10px] font-semibold ${s.status === 'Selesai' ? 'bg-emerald-100 text-emerald-800' : s.status === 'Sedang Berlangsung' ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-blue-800'}">
+                                                        ${s.status}
+                                                    </span>
+                                                </td>
+                                                <td class="p-3 text-center">
+                                                    <div class="flex justify-center gap-1">
+                                                        <button onclick="openModalJadwal(${s.id})" class="p-1.5 bg-amber-500 text-white rounded hover:bg-amber-600"><i data-lucide="edit" class="w-3.5 h-3.5"></i></button>
+                                                        <button onclick="deleteJadwal(${s.id})" class="p-1.5 bg-rose-600 text-white rounded hover:bg-rose-700"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    `;
+                case 'dpt':
+                    return `
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 space-y-6">
+                            <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-700 pb-4">
+                                <div>
+                                    <h3 class="font-bold text-lg font-heading text-slate-900 dark:text-white">Manajemen Database DPT</h3>
+                                    <p class="text-xs text-slate-500">Kelola pemilih terdaftar & sinkronisasi data dusun</p>
+                                </div>
+                                <button onclick="alert('Fitur Import CSV / Excel DPT Siap Digunakan')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow transition flex items-center gap-2">
+                                    <i data-lucide="upload" class="w-4 h-4"></i> Import File DPT
+                                </button>
+                            </div>
+                            <div class="text-xs text-slate-500">
+                                Total pemilih aktif dalam database: <strong>${DB.voters.length} sampel data terdaftar</strong> dari total ${DB.totalDpt.total.toLocaleString('id-ID')} pemilih desa.
+                            </div>
+                        </div>
+                    `;
+                case 'logs':
+                    return `
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 space-y-4">
+                            <h3 class="font-bold text-lg font-heading text-slate-900 dark:text-white">System Audit Trail Log</h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left text-xs">
+                                    <thead>
+                                        <tr class="bg-slate-50 dark:bg-slate-900 text-slate-500 uppercase border-b border-slate-200 dark:border-slate-700">
+                                            <th class="p-3">Waktu</th>
+                                            <th class="p-3">User</th>
+                                            <th class="p-3">Aksi</th>
+                                            <th class="p-3">Rincian Operasi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
+                                        ${DB.auditLogs.map(l => `
+                                            <tr>
+                                                <td class="p-3 font-mono text-slate-400">${l.time}</td>
+                                                <td class="p-3 font-semibold text-primary-600">${l.user}</td>
+                                                <td class="p-3 font-semibold">${l.action}</td>
+                                                <td class="p-3 text-slate-600 dark:text-slate-300">${l.details}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    `;
+                default: return '';
+            }
+        }
+
+        // --- CHART QUICK COUNT INITIALIZATION ---
+        function initQuickCountChart() {
+            const ctx = document.getElementById('quickCountChart');
+            if (!ctx) return;
+
+            if (quickCountChartInstance) {
+                quickCountChartInstance.destroy();
+            }
+
+            const labels = DB.candidates.map(c => `Calon ${c.nomor_urut}: ${c.nama}`);
+            const data = DB.candidates.map(c => c.votes);
+
+            quickCountChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Perolehan Suara',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(139, 92, 246, 0.8)',
+                            'rgba(236, 72, 153, 0.8)'
+                        ],
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        function openModalUpdateVotes() {
+            const modal = document.getElementById('admin-modal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+
+            title.innerText = "Update Data Perolehan Suara (Quick Count)";
+            body.innerHTML = `
+                <form onsubmit="saveVotes(event)" class="space-y-4">
+                    ${DB.candidates.map(c => `
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Calon ${c.nomor_urut} -${c.nama}</label>
+                            <input type="number" id="vote-calon-${c.id}" required value="${c.votes}" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs font-mono">
+                        </div>
+                    `).join('')}
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Suara Tidak Sah / Rusak</label>
+                        <input type="number" id="vote-invalid" required value="${DB.invalidVotes}" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs font-mono">
+                    </div>
+                    <div class="pt-4 flex justify-end gap-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-xs font-semibold rounded-lg">Batal</button>
+                        <button type="submit" class="px-4 py-2 bg-amber-500 text-white text-xs font-semibold rounded-lg shadow">Simpan Suara</button>
+                    </div>
+                </form>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function saveVotes(e) {
+            e.preventDefault();
+            DB.candidates.forEach(c => {
+                const input = document.getElementById(`vote-calon-${c.id}`);
+                if (input) c.votes = parseInt(input.value) || 0;
+            });
+            const invalidInput = document.getElementById('vote-invalid');
+            if (invalidInput) DB.invalidVotes = parseInt(invalidInput.value) || 0;
+
+            addAuditLog("Update Suara", "Memperbarui data perolehan suara sementara (Quick Count)");
+            closeModal();
+            renderAdminDashboard(document.getElementById('main-content'), 'overview');
+        }
+
+        // --- HANDLERS FOR ADMIN CRUD BERITA ---
+        function openModalBerita(id = null) {
+            const modal = document.getElementById('admin-modal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+
+            const item = id ? DB.news.find(n => n.id === id) : { id: null, title: "", category: "Pengumuman", author: "Panitia", date: new Date().toISOString().split('T')[0], image: "", content: "", status: "Published" };
+
+            title.innerText = id ? "Edit Artikel Berita" : "Tambah Berita Baru";
+            body.innerHTML = `
+                <form onsubmit="saveBerita(event, ${id})" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Judul Berita</label>
+                        <input type="text" id="form-b-title" required value="${item.title}" placeholder="Masukkan Judul Berita" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Kategori</label>
+                            <select id="form-b-category" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                                <option value="Pengumuman" ${item.category === 'Pengumuman' ? 'selected' : ''}>Pengumuman</option>
+                                <option value="Kegiatan" ${item.category === 'Kegiatan' ? 'selected' : ''}>Kegiatan</option>
+                                <option value="Sosialisasi" ${item.category === 'Sosialisasi' ? 'selected' : ''}>Sosialisasi</option>
+                                <option value="Berita" ${item.category === 'Berita' ? 'selected' : ''}>Berita</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Tanggal Publikasi</label>
+                            <input type="date" id="form-b-date" required value="${item.date}"> class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Penulis / Author</label>
+                            <input type="text" id="form-b-author" value="${item.author}" placeholder="Panitia" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">URL Gambar Header</label>
+                            <input type="text" id="form-b-image" value="${item.image}" placeholder="https://..." class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Isi Berita / Artikel</label>
+                        <textarea id="form-b-content" required rows="5" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">${item.content}</textarea>
+                    </div>
+                    <div class="pt-4 flex justify-end gap-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-xs font-semibold rounded-lg">Batal</button>
+                        <button type="submit" class="px-4 py-2 bg-primary-700 text-white text-xs font-semibold rounded-lg shadow">Simpan Artikel Berita</button>
+                    </div>
+                </form>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function saveBerita(e, id) {
+            e.preventDefault();
+            const title = document.getElementById('form-b-title').value;
+            const category = document.getElementById('form-b-category').value;
+            const date = document.getElementById('form-b-date').value;
+            const author = document.getElementById('form-b-author').value || "Panitia";
+            const image = document.getElementById('form-b-image').value;
+            const content = document.getElementById('form-b-content').value;
+
+            if (id) {
+                const target = DB.news.find(n => n.id === id);
+                if (target) {
+                    target.title = title;
+                    target.category = category;
+                    target.date = date;
+                    target.author = author;
+                    target.image = image;
+                    target.content = content;
+                }
+                addAuditLog("Update Berita", `Memperbarui artikel berita: ${title}`);
+            } else {
+                const newId = DB.news.length ? Math.max(...DB.news.map(n => n.id)) + 1 : 1;
+                DB.news.unshift({ id: newId, title, category, date, author, image, content, status: "Published" });
+                addAuditLog("Tambah Berita", `Menambahkan berita baru: ${title}`);
+            }
+
+            closeModal();
+            renderAdminDashboard(document.getElementById('main-content'), 'berita');
+        }
+
+        function deleteBerita(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus artikel berita ini?")) {
+                const idx = DB.news.findIndex(n => n.id === id);
+                if (idx !== -1) {
+                    const title = DB.news[idx].title;
+                    DB.news.splice(idx, 1);
+                    addAuditLog("Hapus Berita", `Menghapus berita: ${title}`);
+                    renderAdminDashboard(document.getElementById('main-content'), 'berita');
+                }
+            }
+        }
+
+        // --- HANDLERS FOR ADMIN CRUD CALON & JADWAL ---
+        function openModalCalon(id = null) {
+            const modal = document.getElementById('admin-modal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+
+            const item = id ? DB.candidates.find(c => c.id === id) : { id: null, nomor_urut: "", nama: "", photo: "", visi: "", misi: [], program: "" };
+
+            title.innerText = id ? "Edit Data Calon Kepala Desa" : "Tambah Calon Kepala Desa Baru";
+            body.innerHTML = `
+                <form onsubmit="saveCalon(event, ${id})" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Nomor Urut</label>
+                            <input type="text" id="form-nomor" required value="${item.nomor_urut}" placeholder="01" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Nama Lengkap Calon</label>
+                            <input type="text" id="form-nama" required value="${item.nama}" placeholder="Nama Calon" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">URL Foto Profil</label>
+                        <input type="text" id="form-photo" value="${item.photo}" placeholder="https://..." class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Visi Kandidat</label>
+                        <textarea id="form-visi" required rows="2" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">${item.visi}</textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Misi (Pisahkan dengan koma atau baris baru)</label>
+                        <textarea id="form-misi" rows="3" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">${Array.isArray(item.misi) ? item.misi.join('\n') : item.misi}</textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Program Kerja Unggulan</label>
+                        <input type="text" id="form-program" value="${item.program}" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                    </div>
+                    <div class="pt-4 flex justify-end gap-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-xs font-semibold rounded-lg">Batal</button>
+                        <button type="submit" class="px-4 py-2 bg-primary-700 text-white text-xs font-semibold rounded-lg shadow">Simpan Data Calon</button>
+                    </div>
+                </form>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function saveCalon(e, id) {
+            e.preventDefault();
+            const nomor = document.getElementById('form-nomor').value;
+            const nama = document.getElementById('form-nama').value;
+            const photo = document.getElementById('form-photo').value || "https://via.placeholder.com/400";
+            const visi = document.getElementById('form-visi').value;
+            const misiRaw = document.getElementById('form-misi').value;
+            const program = document.getElementById('form-program').value;
+
+            const misiArr = misiRaw.split('\n').filter(m => m.trim() !== '');
+
+            if (id) {
+                const target = DB.candidates.find(c => c.id === id);
+                if (target) {
+                    target.nomor_urut = nomor;
+                    target.nama = nama;
+                    target.photo = photo;
+                    target.visi = visi;
+                    target.misi = misiArr;
+                    target.program = program;
+                }
+                addAuditLog("Update Calon", `Memperbarui data calon ${nama}`);
+            } else {
+                const newId = DB.candidates.length ? Math.max(...DB.candidates.map(c => c.id)) + 1 : 1;
+                DB.candidates.push({ id: newId, nomor_urut: nomor, nama, photo, visi, misi: misiArr, program, votes: 0 });
+                addAuditLog("Tambah Calon", `Menambahkan calon baru ${nama}`);
+            }
+
+            closeModal();
+            renderAdminDashboard(document.getElementById('main-content'), 'calon');
+        }
+
+        function deleteCalon(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus data calon ini?")) {
+                const idx = DB.candidates.findIndex(c => c.id === id);
+                if (idx !== -1) {
+                    const name = DB.candidates[idx].nama;
+                    DB.candidates.splice(idx, 1);
+                    addAuditLog("Hapus Calon", `Menghapus data calon ${name}`);
+                    renderAdminDashboard(document.getElementById('main-content'), 'calon');
+                }
+            }
+        }
+
+        function openModalJadwal(id = null) {
+            const modal = document.getElementById('admin-modal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+
+            const item = id ? DB.schedules.find(s => s.id === id) : { id: null, title: "", start_date: "", end_date: "", time: "", location: "", status: "Akan Datang", desc: "" };
+
+            title.innerText = id ? "Edit Jadwal Pelaksanaan Pilkades" : "Tambah Jadwal Agenda Baru";
+            body.innerHTML = `
+                <form onsubmit="saveJadwal(event, ${id})" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Nama Agenda / Tahapan</label>
+                        <input type="text" id="form-j-title" required value="${item.title}" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Tanggal Mulai</label>
+                            <input type="date" id="form-j-start" required value="${item.start_date}" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Tanggal Selesai</label>
+                            <input type="date" id="form-j-end" required value="${item.end_date}" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Waktu</label>
+                            <input type="text" id="form-j-time" value="${item.time}" placeholder="08:00 - 16:00 WITA" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Status Tahapan</label>
+                            <select id="form-j-status" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                                <option value="Selesai" ${item.status === 'Selesai' ? 'selected' : ''}>Selesai</option>
+                                <option value="Sedang Berlangsung" ${item.status === 'Sedang Berlangsung' ? 'selected' : ''}>Sedang Berlangsung</option>
+                                <option value="Akan Datang" ${item.status === 'Akan Datang' ? 'selected' : ''}>Akan Datang</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Lokasi Pelaksanaan</label>
+                        <input type="text" id="form-j-location" value="${item.location}" placeholder="Kantor Desa" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Keterangan / Rincian</label>
+                        <textarea id="form-j-desc" rows="2" class="w-full p-2.5 bg-slate-50 dark:bg-slate-900 border rounded-lg text-xs">${item.desc}</textarea>
+                    </div>
+                    <div class="pt-4 flex justify-end gap-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-xs font-semibold rounded-lg">Batal</button>
+                        <button type="submit" class="px-4 py-2 bg-primary-700 text-white text-xs font-semibold rounded-lg shadow">Simpan Agenda</button>
+                    </div>
+                </form>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function saveJadwal(e, id) {
+            e.preventDefault();
+            const title = document.getElementById('form-j-title').value;
+            const start_date = document.getElementById('form-j-start').value;
+            const end_date = document.getElementById('form-j-end').value;
+            const time = document.getElementById('form-j-time').value;
+            const status = document.getElementById('form-j-status').value;
+            const location = document.getElementById('form-j-location').value;
+            const desc = document.getElementById('form-j-desc').value;
+
+            if (id) {
+                const target = DB.schedules.find(s => s.id === id);
+                if (target) {
+                    target.title = title;
+                    target.start_date = start_date;
+                    target.end_date = end_date;
+                    target.time = time;
+                    target.status = status;
+                    target.location = location;
+                    target.desc = desc;
+                }
+                addAuditLog("Update Jadwal", `Memperbarui jadwal: ${title}`);
+            } else {
+                const newId = DB.schedules.length ? Math.max(...DB.schedules.map(s => s.id)) + 1 : 1;
+                DB.schedules.push({ id: newId, title, start_date, end_date, time, location, status, desc });
+                addAuditLog("Tambah Jadwal", `Menambahkan jadwal baru: ${title}`);
+            }
+
+            closeModal();
+            renderAdminDashboard(document.getElementById('main-content'), 'jadwal');
+        }
+
+        function deleteJadwal(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus agenda jadwal ini?")) {
+                const idx = DB.schedules.findIndex(s => s.id === id);
+                if (idx !== -1) {
+                    const title = DB.schedules[idx].title;
+                    DB.schedules.splice(idx, 1);
+                    addAuditLog("Hapus Jadwal", `Menghapus jadwal: ${title}`);
+                    renderAdminDashboard(document.getElementById('main-content'), 'jadwal');
+                }
+            }
+        }
+
+        // INITIALIZE APP ON LOAD
+        document.addEventListener('DOMContentLoaded', () => {
+            navigateTo('home');
+        });
+    </script>
+</body>
+</html>
