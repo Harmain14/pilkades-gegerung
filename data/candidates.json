@@ -1,0 +1,3 @@
+[
+  { "id": 1, "nomor_urut": "01", "nama": "NAMA CALON 01", "photo": "https://images.unsplash.com/...", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 }
+]
