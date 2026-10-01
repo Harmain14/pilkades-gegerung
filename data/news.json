@@ -1,5 +1,15 @@
 [
     {
+    "id": 1,
+    "title": "Panitia Pilkades Desa Gegerung Pasang Spanduk Pengumuman Pendaftaran Calon Kepala Desa",
+    "date": "2026-09-29",
+    "category": "Kegiatan",
+    "author": "Abdullah Harmain",
+    "image": "https://pilkades-gegerung2026.vercel.app/berita/berita 3.jpeg",
+    "content": "GEGERUNG, LOMBOK BARAT — Panitia Pemilihan Kepala Desa (Pilkades) Desa Gegerung melaksanakan pemasangan spanduk pengumuman pendaftaran Calon Kepala Desa Gegerung Tahun 2026 pada Selasa, 29 September 2026.\n\nPemasangan spanduk tersebut merupakan bagian dari tahapan persiapan Pilkades Serentak Kabupaten Lombok Barat Tahun 2026, khususnya dalam menyampaikan informasi pendaftaran bakal calon kepala desa kepada masyarakat secara terbuka.\n\nMelalui pemasangan spanduk di lokasi yang mudah terlihat oleh masyarakat, Panitia Pilkades Desa Gegerung menyampaikan informasi mengenai jadwal pendaftaran, persyaratan, serta dokumen yang harus dipenuhi oleh calon kepala desa sesuai dengan ketentuan yang telah ditetapkan.\n\nAdapun pendaftaran Calon Kepala Desa Gegerung Tahun 2026 dilaksanakan pada 28 September sampai dengan 7 Oktober 2026. Informasi tersebut diharapkan dapat menjangkau seluruh masyarakat, khususnya warga yang memiliki keinginan dan memenuhi persyaratan untuk mengikuti proses pencalonan Kepala Desa Gegerung.\n\nPanitia juga mengimbau kepada masyarakat yang berminat mencalonkan diri agar mempersiapkan seluruh persyaratan administrasi dengan baik serta menyerahkan berkas pendaftaran sesuai dengan jadwal yang telah ditentukan.\n\nPenyampaian informasi secara terbuka melalui spanduk menjadi salah satu upaya Panitia Pilkades Desa Gegerung untuk memastikan masyarakat memperoleh informasi yang jelas mengenai tahapan pencalonan.\n\nDengan dimulainya tahapan pendaftaran calon kepala desa, Panitia Pilkades Desa Gegerung mengajak seluruh masyarakat untuk bersama-sama menyukseskan setiap tahapan Pilkades Desa Gegerung Tahun 2026 dengan tertib, transparan, dan sesuai dengan ketentuan yang berlaku.\n\nPilkades Desa Gegerung Tahun 2026\nSatu Suara, Masa Depan Desa Gegerung.",
+    "status": "Published"
+  },
+    {
     "id": 2,
     "title": "Rekapitulasi dan Penetapan DPS Perbaikan serta DPTAM sebagai DPT Pilkades Desa Gegerung Tahun 2026",
     "date": "2026-09-25",
@@ -10,7 +20,7 @@
     "status": "Published"
   },
   {
-    "id": 1,
+    "id": 3
     "title": "Panitia Pilkades Desa Gegerung Laksanakan Pemuktahiran dan Penetapan Daftar Pemilih Sementara (DPS) Tahun 2026",
     "date": "2026-09-14",
     "category": "Sosialisasi",
@@ -20,7 +30,7 @@
     "status": "Published"
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "Judul Berita",
     "date": "2026-10-15",
     "category": "Pengumuman",
