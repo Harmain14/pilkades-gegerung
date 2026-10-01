@@ -1,3 +1,312 @@
 [
-  { "id": 1, "title": "Pembentukan Panitia", "start_date": "2026-08-01", "end_date": "2026-08-10", "time": "09:00 WITA", "location": "Aula Desa", "status": "Selesai", "desc": "Deskripsi kegiatan..." }
+  {
+    "id": 1,
+    "title": "Pengumuman dan Pendaftaran Bakal Calon",
+    "start_date": "2026-09-28",
+    "end_date": "2026-10-07",
+    "time": "",
+    "location": "",
+    "status": "Berlangsung",
+    "desc": "Pencalonan"
+  },
+  {
+    "id": 2,
+    "title": "Penelitian Persyaratan Administrasi",
+    "start_date": "2026-10-08",
+    "end_date": "2026-10-09",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Pencalonan"
+  },
+  {
+    "id": 3,
+    "title": "Penyampaian Hasil Penelitian Berkas Administrasi",
+    "start_date": "2026-10-10",
+    "end_date": "2026-10-10",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Pencalonan"
+  },
+  {
+    "id": 4,
+    "title": "Perbaikan Berkas",
+    "start_date": "2026-10-12",
+    "end_date": "2026-10-16",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Pencalonan"
+  },
+  {
+    "id": 5,
+    "title": "Penelitian dan Pemberitahuan Ulang Perbaikan Berkas",
+    "start_date": "2026-10-17",
+    "end_date": "2026-10-24",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Pencalonan"
+  },
+  {
+    "id": 6,
+    "title": "Penetapan Bakal Calon Kepala Desa yang memenuhi syarat",
+    "start_date": "2026-10-26",
+    "end_date": "2026-10-27",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Pencalonan"
+  },
+  {
+    "id": 7,
+    "title": "Pengajuan Keberatan",
+    "start_date": "2026-10-28",
+    "end_date": "2026-10-30",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Pencalonan"
+  },
+  {
+    "id": 8,
+    "title": "Tindak Lanjut Keberatan",
+    "start_date": "2026-10-31",
+    "end_date": "2026-11-03",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Pencalonan"
+  },
+  {
+    "id": 9,
+    "title": "Seleksi Tambahan",
+    "start_date": "2026-11-04",
+    "end_date": "2026-11-09",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Pencalonan"
+  },
+  {
+    "id": 10,
+    "title": "Penetapan dan Pengumuman Calon Kepala Desa",
+    "start_date": "2026-11-10",
+    "end_date": "2026-11-11",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Pencalonan"
+  },
+  {
+    "id": 11,
+    "title": "Pengundian Nomor Urut Calon Kepala Desa",
+    "start_date": "2026-11-12",
+    "end_date": "2026-11-12",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Pencalonan"
+  },
+  {
+    "id": 12,
+    "title": "Perpanjangan I Pendaftaran Bakal Calon",
+    "start_date": "2026-10-08",
+    "end_date": "2026-10-24",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Perpanjangan Pendaftaran Calon"
+  },
+  {
+    "id": 13,
+    "title": "Perpanjangan II Pendaftaran Bakal Calon",
+    "start_date": "2026-10-26",
+    "end_date": "2026-11-05",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Perpanjangan Pendaftaran Calon"
+  },
+  {
+    "id": 14,
+    "title": "Musyawarah Penetapan 1 Calon Kepala Desa Terdaftar",
+    "start_date": "2026-11-06",
+    "end_date": "2026-11-09",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Perpanjangan Pendaftaran Calon"
+  },
+  {
+    "id": 15,
+    "title": "Penetapan dan Pengumuman Calon Kepala Desa",
+    "start_date": "2026-11-10",
+    "end_date": "2026-11-11",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Perpanjangan Pendaftaran Calon"
+  },
+  {
+    "id": 16,
+    "title": "Pengundian Nomor Urut Calon Kepala Desa",
+    "start_date": "2026-11-12",
+    "end_date": "2026-11-12",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Perpanjangan Pendaftaran Calon"
+  },
+  {
+    "id": 17,
+    "title": "Pembentukan KPPS",
+    "start_date": "2026-10-12",
+    "end_date": "2026-11-14",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Pembentukan dan Bimtek KPPS"
+  },
+  {
+    "id": 18,
+    "title": "Bimtek KPPS",
+    "start_date": "2026-11-16",
+    "end_date": "2026-11-23",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Pembentukan dan Bimtek KPPS"
+  },
+  {
+    "id": 19,
+    "title": "Kampanye",
+    "start_date": "2026-12-02",
+    "end_date": "2026-12-04",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Kampanye dan Masa Tenang"
+  },
+  {
+    "id": 20,
+    "title": "Masa Tenang",
+    "start_date": "2026-12-05",
+    "end_date": "2026-12-08",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Kampanye dan Masa Tenang"
+  },
+  {
+    "id": 21,
+    "title": "Distribusi Logistik ke TPS",
+    "start_date": "2026-12-08",
+    "end_date": "2026-12-08",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Distribusi Logistik ke TPS"
+  },
+  {
+    "id": 22,
+    "title": "Pemungutan Suara",
+    "start_date": "2026-12-09",
+    "end_date": "2026-12-09",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Pemungutan Suara"
+  },
+  {
+    "id": 23,
+    "title": "Rekapitulasi Hasil Perhitungan Suara",
+    "start_date": "2026-12-09",
+    "end_date": "2026-12-09",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Rekapitulasi Hasil"
+  },
+  {
+    "id": 24,
+    "title": "Penetapan Calon Kepala Desa Terpilih Oleh Panitia",
+    "start_date": "2026-12-09",
+    "end_date": "2026-12-09",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Rekapitulasi Hasil"
+  },
+  {
+    "id": 25,
+    "title": "Penyerahan Laporan Panitia kepada BPD",
+    "start_date": "2026-12-09",
+    "end_date": "2026-12-09",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Rekapitulasi Hasil"
+  },
+  {
+    "id": 26,
+    "title": "BPD Melaporkan ke Camat",
+    "start_date": "2026-12-10",
+    "end_date": "2026-12-17",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Penetapan dan Pengesahan"
+  },
+  {
+    "id": 27,
+    "title": "Camat Meneruskan ke Bupati Cq DPMD",
+    "start_date": "2026-12-18",
+    "end_date": "2026-12-26",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Penetapan dan Pengesahan"
+  },
+  {
+    "id": 28,
+    "title": "Pengajuan Perselisihan Hasil Perhitungan Suara",
+    "start_date": "2026-12-10",
+    "end_date": "2026-12-12",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Penyelesaian Perselisihan"
+  },
+  {
+    "id": 29,
+    "title": "Penyelesaian Perselisihan Oleh Panitia Kabupaten",
+    "start_date": "2026-12-14",
+    "end_date": "2027-01-16",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Penyelesaian Perselisihan"
+  },
+  {
+    "id": 30,
+    "title": "Bupati Menetapkan Pengesahan dan Pengangkatan Kepala Desa",
+    "start_date": "2026-12-28",
+    "end_date": "2027-01-30",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Penetapan dan Pelantikan"
+  },
+  {
+    "id": 31,
+    "title": "Pelantikan",
+    "start_date": "2027-02-06",
+    "end_date": "2027-02-06",
+    "time": "",
+    "location": "",
+    "status": "Akan Datang",
+    "desc": "Penetapan dan Pelantikan"
+  }
 ]
