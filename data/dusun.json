@@ -1,4 +1,9 @@
 [
   { "nama": "Dusun Ketapang", "dps": 929, "tambahan": 48, "dpt": 977, "l": 492, "p": 485 },
-  { "nama": "Jelateng Barat", "dps": 333, "tambahan": 13, "dpt": 346, "l": 174, "p": 172 }
+  { "nama": "Jelateng Barat", "dps": 333, "tambahan": 13, "dpt": 346, "l": 174, "p": 172 },
+  { "nama": "Jelateng Tengah", "dps": 397, "tambahan": 22, "dpt": 419, "l": 205, "p": 214 },
+  { "nama": "Jelateng Timur", "dps": 375, "tambahan": 22, "dpt": 397, "l": 192, "p": 215 },
+  { "nama": "Orong Selatan", "dps": 589, "tambahan": 46, "dpt": 635, "l": 319, "p": 316 },
+  { "nama": "Orong Utara", "dps": 363, "tambahan": 25, "dpt": 388, "l": 203, "p": 185 },
+  { "nama": "Orong Puncak", "dps": 371, "tambahan": 43, "dpt": 414, "l": 200, "p": 214 }
 ]
