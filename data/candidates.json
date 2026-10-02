@@ -1,7 +1,7 @@
 [
-  { "id": 1, "nomor_urut": "01", "nama": "NAMA CALON 01", "photo": "https://images.unsplash.com/...", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
-  { "id": 2, "nomor_urut": "02", "nama": "NAMA CALON 02", "photo": "https://images.unsplash.com/...", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
-  { "id": 3, "nomor_urut": "03", "nama": "NAMA CALON 03", "photo": "https://images.unsplash.com/...", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
-  { "id": 4, "nomor_urut": "04", "nama": "NAMA CALON 04", "photo": "https://images.unsplash.com/...", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
-  { "id": 5, "nomor_urut": "05", "nama": "NAMA CALON 05", "photo": "https://images.unsplash.com/...", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 }
+  { "id": 1, "nomor_urut": "01", "nama": "NAMA CALON 01", "photo": "https://pilkades-gegerung2026.vercel.app/calon/profile.jpeg", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
+  { "id": 2, "nomor_urut": "02", "nama": "NAMA CALON 02", "photo": "https://pilkades-gegerung2026.vercel.app/calon/profile.jpeg", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
+  { "id": 3, "nomor_urut": "03", "nama": "NAMA CALON 03", "photo": "https://pilkades-gegerung2026.vercel.app/calon/profile.jpeg", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
+  { "id": 4, "nomor_urut": "04", "nama": "NAMA CALON 04", "photo": "https://pilkades-gegerung2026.vercel.app/calon/profile.jpeg", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
+  { "id": 5, "nomor_urut": "05", "nama": "NAMA CALON 05", "photo": "https://pilkades-gegerung2026.vercel.app/calon/profile.jpeg", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 }
 ]
