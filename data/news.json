@@ -1,6 +1,16 @@
 [
     {
     "id": 1,
+    "title": "Bapak Agus Phatoni Mendaftarkan Diri sebagai Bakal Calon Kepala Desa Gegerung",
+    "date": "2026-10-05",
+    "category": "Pendaftaran Calon",
+    "author": "Abdullah Harmain",
+    "image": "https://pilkades-gegerung2026.vercel.app/berita/agus.jpeg",
+    "content": "Gegerung, 5 Oktober 2026 — Tahapan pendaftaran Bakal Calon Kepala Desa Gegerung Tahun 2026 kembali menerima pendaftar. Agus Phatoni, warga Dusun Orong Utara, Desa Gegerung, menjadi bakal calon kepala desa yang ke-5 yang mendaftarkan diri kepada Panitia Pemilihan Kepala Desa (Pilkades) Desa Gegerung. Pendaftaran dilaksanakan pada Senin, 5 Oktober 2026, pukul 09.00 WITA, bertempat di Sekretariat Panitia Pilkades Desa Gegerung. Dalam proses pendaftaran tersebut, Agus Phatoni menyerahkan berkas persyaratan kepada panitia untuk selanjutnya dilakukan pemeriksaan dan verifikasi sesuai dengan ketentuan yang berlaku. Dengan pendaftaran Agus Phatoni, jumlah bakal calon yang telah mendaftarkan diri dalam tahapan Pilkades Desa Gegerung Tahun 2026 menjadi lima orang. Panitia Pilkades Desa Gegerung akan melakukan penelitian dan verifikasi terhadap seluruh berkas pendaftaran bakal calon secara tertib, objektif, transparan, dan sesuai dengan ketentuan yang telah ditetapkan. Pendaftaran ini menjadi salah satu tahapan penting dalam rangkaian pelaksanaan Pilkades Desa Gegerung Tahun 2026 menuju proses pemilihan kepala desa yang demokratis, transparan, dan partisipatif.",
+    "status": "Published"
+  },
+    {
+    "id": 2,
     "title": "Bapak Harun Mendaftarkan Diri sebagai Bakal Calon Kepala Desa Gegerung",
     "date": "2026-10-02",
     "category": "Pendaftaran Calon",
@@ -10,7 +20,7 @@
     "status": "Published"
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Bapak Darmawan Daftarkan Diri sebagai Bakal Calon Kepala Desa Gegerung Tahun 2026",
     "date": "2026-10-01",
     "category": "Pendaftaran Calon",
@@ -20,7 +30,7 @@
     "status": "Published"
   },
     {
-    "id": 3,
+    "id": 4,
     "title": "Bapak H. Septian Ardiansyah Mendaftarkan Diri sebagai Bakal Calon Kepala Desa Gegerung",
     "date": "2026-09-30",
     "category": "Pendaftaran Calon",
@@ -30,7 +40,7 @@
     "status": "Published"
   },
   {
-    "id": 4,
+    "id": 5,
     "title": "Bapak H. Jalim Resmi Mendaftarkan Diri sebagai Bakal Calon Kepala Desa Gegerung Tahun 2026",
     "date": "2026-09-29",
     "category": "Pendaftaran Calon",
@@ -40,7 +50,7 @@
     "status": "Published"
   },
     {
-    "id": 5,
+    "id": 6,
     "title": "Panitia Pilkades Desa Gegerung Pasang Spanduk Pengumuman Pendaftaran Calon Kepala Desa",
     "date": "2026-09-29",
     "category": "Kegiatan",
@@ -50,7 +60,7 @@
     "status": "Published"
   },
     {
-    "id": 6,
+    "id": 7,
     "title": "Rekapitulasi dan Penetapan DPS Perbaikan serta DPTAM sebagai DPT Pilkades Desa Gegerung Tahun 2026",
     "date": "2026-09-25",
     "category": "Sosialisasi",
@@ -60,7 +70,7 @@
     "status": "Published"
   },
   {
-    "id": 7,
+    "id": 8,
     "title": "Panitia Pilkades Desa Gegerung Laksanakan Pemuktahiran dan Penetapan Daftar Pemilih Sementara (DPS) Tahun 2026",
     "date": "2026-09-14",
     "category": "Sosialisasi",
