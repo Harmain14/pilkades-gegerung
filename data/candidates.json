@@ -1,7 +1,7 @@
 [
-  { "id": 1, "nomor_urut": "", "nama": "JALIM, S.Sos", "photo": "https://pilkades-gegerung2026.vercel.app/calon/jalim.jpeg", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
-  { "id": 2, "nomor_urut": "", "nama": "SEPTIAN ARDIANSYAH", "photo": "https://pilkades-gegerung2026.vercel.app/calon/septian.jpeg", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
-  { "id": 3, "nomor_urut": "", "nama": "DARMAWAN", "photo": "https://pilkades-gegerung2026.vercel.app/calon/darmawan.jpeg", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
-  { "id": 4, "nomor_urut": "", "nama": "HARUN", "photo": "https://pilkades-gegerung2026.vercel.app/calon/harun.jpeg", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
-  { "id": 5, "nomor_urut": "", "nama": "AGUS PATHONI", "photo": "https://pilkades-gegerung2026.vercel.app/calon/agus.jpeg", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 }
-]
+   { "id": 1, "nomor_urut": "1", "nama": "AGUS PATHONI", "photo": "https://pilkades-gegerung2026.vercel.app/calon/agus.png", "visi": "Terwujudnya desa gegerung yang maju, mandiri Sejahtera dan berkeadilan sosial", "misi": ["1. KEBERLANJUTAN PEMBANGUNAN, dengan cara merawat yang baik menuntaskan yang belum selesai", "2. KEDAULATAN TANI, dengan cara  berdiri paling depan membela Hak irigasi warga", "3. INFRASTRUKTUR, dengan cara ikhtiar yang nyata, membenahi jalan kita", "4. EKONOMI RAKYAT, dengan cara menjadikan warga gegerung tuan rumah di tanah sendiri", "5. PELAYANAN PUBLIK YANG BERSIH, dengan cara aparatur yang melayani bukan di layani"], "program": "Program kerja...", "votes": 420 },
+  { "id": 2, "nomor_urut": "2", "nama": "DARMAWAN", "photo": "https://pilkades-gegerung2026.vercel.app/calon/darmawan.png", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
+  { "id": 3, "nomor_urut": "3", "nama": "JALIM, S.Sos", "photo": "https://pilkades-gegerung2026.vercel.app/calon/jalim.png", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
+  { "id": 4, "nomor_urut": "4", "nama": "SEPTIAN ARDIANSYAH", "photo": "https://pilkades-gegerung2026.vercel.app/calon/dian.png", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
+  { "id": 5, "nomor_urut": "5", "nama": "HARUN", "photo": "https://pilkades-gegerung2026.vercel.app/calon/harun.png", "visi": "Visi calon...", "misi": ["Misi 1", "Misi 2"], "program": "Program kerja...", "votes": 420 },
+ ]
